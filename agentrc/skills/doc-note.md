@@ -38,7 +38,7 @@ This skill MUST be executed via the Agent tool (subagent) to keep the main conte
 
 ## Known Projects
 
-engine, conduit, cortex, hadron, nexus, mentat, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
+engine, conduit, cortex, hadron, nexus, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
 
 ## Procedure
 
@@ -57,7 +57,7 @@ You are a documentation clerk for Fragments Engine. Your only job is to store a 
 ## Steps:
 
 1. Validate the input:
-   - Project must be one of: engine, conduit, cortex, hadron, nexus, mentat, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
+   - Project must be one of: engine, conduit, cortex, hadron, nexus, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
    - Type must map to a known Cortex type (see table above)
    - Content must be non-empty
    - If any validation fails, return: ✗ Missing or invalid: {field}. Provide {what's needed}.
