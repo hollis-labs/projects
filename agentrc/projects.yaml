@@ -1,0 +1,78 @@
+# Project Registry — agentrc v2
+# Distinguishes projects from plain directories.
+# Used by agents to load project-specific context and determine available roles.
+
+version: 1
+
+projects:
+  # === Fragments Engine (monorepo) ===
+  fragments-engine:
+    root: ~/Projects-apps/fragments-engine
+    type: monorepo
+    description: Core platform — Conduit, Cortex, Engine
+    modules:
+      conduit:
+        path: conduit
+        lang: go
+        description: Agent-agnostic chat harness
+      cortex:
+        path: cortex
+        lang: go
+        description: Context registry and persistent memory
+      engine:
+        path: engine
+        lang: go
+        description: Task/sprint management and orchestration
+
+  # === Services ===
+  hadron:
+    root: ~/Projects-apps/hadron
+    lang: go
+    description: Blueprint automation engine
+
+  nanite:
+    root: ~/Projects-apps/nanite
+    lang: go
+    description: RAG and document ingestion
+
+  cerberus:
+    root: ~/Projects-apps/cerberus
+    lang: go
+    description: Service lifecycle manager
+
+  carrier:
+    root: ~/Projects-apps/carrier
+    description: Message transport layer
+
+  nexus:
+    root: ~/Projects-apps/nexus
+    lang: go
+    description: Agent discovery and routing
+
+  # === Apps ===
+  sigil:
+    root: ~/Projects-apps/sigil
+    lang: go
+    description: UI generation engine
+
+  lnklst:
+    root: ~/Projects-apps/lnklst
+    lang: go
+    description: Link list app
+
+  suds-v2:
+    root: ~/Projects-apps/suds-v2
+    lang: typescript
+    description: MUD game (Next.js)
+
+  # === Sites ===
+  fragmentsengine.com:
+    root: ~/Projects-apps/fragmentsengine.com
+    type: static-site
+    description: Fragments Engine marketing site
+
+# === Not projects ===
+# ~/Projects-apps/agentrc        — agentrc source repo (this system)
+# ~/Projects-apps/agent-workspaces — working directory
+# ~/Projects-apps/workspace      — legacy workspace (unused)
+# ~/Projects-apps/mentat         — archive
