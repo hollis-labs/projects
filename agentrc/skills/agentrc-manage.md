@@ -1,12 +1,12 @@
-# Forge Agent (:forge-agent)
+# agentrc Manage (:agentrc-manage)
 
 Create roles, project context docs, and skills for the agentrc system. Runs via sub-agent.
 
 ## When to use
 
-- `/forge-agent role <name> <description>` — Create a new agent role
-- `/forge-agent context <project> <domain>` — Audit a project and generate a context doc
-- `/forge-agent skill <name> <description>` — Create a new skill
+- `/agentrc-manage role <name> <description>` — Create a new agent role
+- `/agentrc-manage context <project> <domain>` — Audit a project and generate a context doc
+- `/agentrc-manage skill <name> <description>` — Create a new skill
 
 ## IMPORTANT: Run in Sub-Agent
 
@@ -15,13 +15,13 @@ This skill MUST be executed via the Agent tool (subagent) to keep the main conte
 ## Mode 1: Create Role
 
 ```
-/forge-agent role <name> <one-line description>
+/agentrc-manage role <name> <one-line description>
 ```
 
 **Examples:**
-- `/forge-agent role backend "Go API specialist with Chi and PostgreSQL"`
-- `/forge-agent role infra "Infrastructure and DevOps with Docker and systemd"`
-- `/forge-agent role data "Data pipeline and ETL specialist"`
+- `/agentrc-manage role backend "Go API specialist with Chi and PostgreSQL"`
+- `/agentrc-manage role infra "Infrastructure and DevOps with Docker and systemd"`
+- `/agentrc-manage role data "Data pipeline and ETL specialist"`
 
 **Procedure:** Launch a sub-agent with:
 
@@ -75,15 +75,15 @@ You are building a new agent role definition for the agentrc system.
 ## Mode 2: Create Project Context
 
 ```
-/forge-agent context <project> <domain>
+/agentrc-manage context <project> <domain>
 ```
 
 **domain** is one of: `frontend`, `backend`, `infra`, `data`, or a custom domain name.
 
 **Examples:**
-- `/forge-agent context hadron frontend` — Audit Hadron's frontend and generate style guide
-- `/forge-agent context cortex backend` — Audit Cortex's Go backend and generate conventions doc
-- `/forge-agent context cerberus infra` — Audit Cerberus's infrastructure setup
+- `/agentrc-manage context hadron frontend` — Audit Hadron's frontend and generate style guide
+- `/agentrc-manage context cortex backend` — Audit Cortex's Go backend and generate conventions doc
+- `/agentrc-manage context cerberus infra` — Audit Cerberus's infrastructure setup
 
 **Procedure:** Launch a sub-agent with:
 
@@ -139,13 +139,13 @@ You are auditing a project's codebase to generate a project-level context doc fo
 ## Mode 3: Create Skill
 
 ```
-/forge-agent skill <name> <description>
+/agentrc-manage skill <name> <description>
 ```
 
 **Examples:**
-- `/forge-agent skill deploy-pipeline "Run hadron deployment pipeline with validation"`
-- `/forge-agent skill db-migrate "Generate and run database migrations for Go projects"`
-- `/forge-agent skill test-runner "Run project tests with coverage and report results"`
+- `/agentrc-manage skill deploy-pipeline "Run hadron deployment pipeline with validation"`
+- `/agentrc-manage skill db-migrate "Generate and run database migrations for Go projects"`
+- `/agentrc-manage skill test-runner "Run project tests with coverage and report results"`
 
 **Procedure:** Launch a sub-agent with:
 
