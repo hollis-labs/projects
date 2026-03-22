@@ -93,13 +93,14 @@ You are auditing a project's codebase to generate a project-level context doc fo
 ## Target
 - Project: {PROJECT}
 - Domain: {DOMAIN}
-- Project root: {resolve from ~/.agentrc/projects.yaml, or ask user if not found}
+- Project root: {resolve from user input, or check `~/Projects-apps/{PROJECT}/` as default. Ask user if not found.}
 
 ## Steps
 
 1. Read the relevant template:
    - For frontend: ~/.agentrc/templates/frontend-project.md
-   - For other domains: use the frontend template as structural reference, adapt sections
+   - For backend: ~/.agentrc/templates/backend-project.md
+   - For other domains: use the closest template as structural reference, adapt sections
 
 2. Read the setup guide: ~/.agentrc/docs/agent-setup-guide.md — section "Creating Project-Level Context"
 

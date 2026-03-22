@@ -1,4 +1,7 @@
-# Global role defaults — available in all projects
+# agentrc global config
+version: 2.1.0
+
+# Role defaults — available in all projects
 # Project-level .agentrc/config.yaml can override or extend these
 
 roles:

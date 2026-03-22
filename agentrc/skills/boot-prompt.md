@@ -33,9 +33,10 @@ Generate a boot prompt for the next session. Manual trigger only — never autom
 Skip this section entirely if the next actions are self-explanatory.}
 ```
 
-3. Write the file to: `/Users/chrispian/Projects-apps/mentat/.agentrc/boot-prompt.md`
+3. Write the file to: `./boot-prompt.md` in the current workspace root.
+   - If `.agentrc/` exists in the workspace, write to `.agentrc/boot-prompt.md` instead.
 
-4. Confirm: "Boot prompt written. Next session can read it at .agentrc/boot-prompt.md"
+4. Confirm: "Boot prompt written to {path}. Next session: read it first."
 
 ## Invariants
 

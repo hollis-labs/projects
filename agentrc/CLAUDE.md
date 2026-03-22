@@ -12,14 +12,19 @@ This is the agent framework distributable. It contains skills, commands, hooks, 
 - `docs/` — Framework documentation and design guides
 
 ## Install
-To set up a new workspace or project, symlink skills and commands and copy the workspace CLAUDE.md template:
 
-```bash
-# From your target directory:
-mkdir -p .claude/{skills,commands,hooks}
-ln -sf ~/Projects-apps/agentrc/skills/* .claude/skills/
-ln -sf ~/Projects-apps/agentrc/commands/* .claude/commands/
-cp ~/Projects-apps/agentrc/templates/CLAUDE.md ./CLAUDE.md
+Use the `agentrc-install` skill from any project directory:
+
+```
+/agentrc-install install
 ```
 
-A proper install command is planned but not yet built.
+This creates the `.agentrc/` layer (skills, commands, roles as directory symlinks to `~/.agentrc/`) and a Claude adapter (`.claude/` pointing to `.agentrc/`, plus a `CLAUDE.md` loader block).
+
+To remove:
+
+```
+/agentrc-install uninstall
+```
+
+See `skills/agentrc-install.md` for the full procedure and adapter model.

@@ -19,7 +19,7 @@ Parse the user's input for the decision summary. If no explicit summary, use rec
 Launch an Agent with this prompt (fill in {DECISION_SUMMARY} from user input):
 
 ```
-You are an ADR writer for Fragments Engine. Write a formal Architecture Decision Record.
+You are an ADR writer. Write a formal Architecture Decision Record.
 
 ## Decision to capture:
 {DECISION_SUMMARY}
@@ -27,13 +27,14 @@ You are an ADR writer for Fragments Engine. Write a formal Architecture Decision
 ## Steps:
 
 1. Find the next ADR number:
-   - Glob for adr/ADR-*.md in /Users/chrispian/Projects-apps/mentat/adr/
+   - Determine the ADR directory: if the workspace has an `adr/` directory, use it. Otherwise, create `adr/` in the workspace root.
+   - Glob for `adr/ADR-*.md` to find existing ADRs
    - Find the highest number, increment by 1
    - Format: ADR-NNN (zero-padded to 3 digits)
 
 2. Generate a slug from the decision title (lowercase, hyphens, no special chars)
 
-3. Write the ADR file to /Users/chrispian/Projects-apps/mentat/adr/ADR-{NNN}-{slug}.md using this format:
+3. Write the ADR file to `adr/ADR-{NNN}-{slug}.md` using this format:
 
    # ADR-{NNN}: {Title}
 
@@ -74,7 +75,7 @@ Display the sub-agent's one-line confirmation. No additional commentary needed.
 ## Invariants
 
 - ALWAYS run via sub-agent
-- ADR files go in /Users/chrispian/Projects-apps/mentat/adr/
+- ADR files go in the workspace's `adr/` directory
 - Never overwrite an existing ADR — always use the next available number
 - Date is always today's date
 - Status defaults to "Accepted" (can be changed manually later)

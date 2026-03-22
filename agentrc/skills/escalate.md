@@ -1,4 +1,4 @@
-# Escalate
+# Escalate (:escalate)
 
 Convert a blocker into an explicit repair task so the system continues operating without hidden failure.
 
@@ -10,29 +10,25 @@ Convert a blocker into an explicit repair task so the system continues operating
 
 ## Procedure
 
-1. **Identify active task.** Check Volon for the current "doing" task, or accept explicit `--task <ID>`.
+1. **Identify active task.** Check Engine for the current "doing" task, or accept explicit `--task <ID>`.
 
-2. **Transition task to blocked.** Use `volon_task_transition` to set status to "blocked". Use `volon_task_update` to add the blocker reason to the description.
+2. **Transition task to blocked.** Use `mcp__engine__engine_task_transition` to set status to "blocked". Use `mcp__engine__engine_task_update` to add the blocker reason to the description.
 
-3. **Create repair task.** Use `volon_task_create`:
+3. **Create repair task.** Use `mcp__engine__engine_task_create`:
    - Title: `Repair: <short blocker summary>`
    - Priority: A (repair tasks always high priority)
    - Tags: repair, escalation
    - Description: link to parent task, blocker reason, evidence, specific next actions
    - Acceptance criteria: parent task unblocked and can proceed
 
-4. **Write ADR if needed.** If the blocker involves an architectural or process decision:
-   - Create `adr/ADR-NNN-<slug>.md`
-   - Status: Proposed
-   - Skip if the blocker is purely operational (missing binary, network issue)
+4. **Write ADR if needed.** If the blocker requires a design or architecture decision (e.g., "should we change the API contract?" or "which approach do we take?"), invoke the `:adr` skill.
+   - Skip if the blocker is purely operational (missing binary, network issue, config error).
 
-5. **Update bootstrap.** Note the blocked task and repair task in `.agentrc/bootstrap.md`.
-
-6. **Emit signal.** `**[TASK-ID] blocked** — <one-line blocker summary>`
+5. **Emit signal.** `**[TASK-ID] blocked** — <one-line blocker summary>`
 
 ## Output
 
-- Volon: blocked task + new repair task
+- Engine: blocked task + new repair task
 - ADR (if architectural decision needed)
 - Console: BLOCKED signal
 
@@ -41,4 +37,4 @@ Convert a blocker into an explicit repair task so the system continues operating
 - Never silently swallow a blocker — always create a repair task
 - Repair tasks always have priority A
 - Blocker reason must be specific, not vague
-- ADRs only for architectural/process decisions, not operational issues
+- ADRs only for design/architecture decisions, not operational issues

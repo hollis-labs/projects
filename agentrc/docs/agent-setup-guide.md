@@ -7,10 +7,17 @@ How to combine roles with project-specific context to create agents that know bo
 The agentrc system layers context in three tiers:
 
 ```
-~/.agentrc/roles/frontend.md        # "I know React/Next.js/shadcn"
-<project>/.agentrc/frontend.md      # "I know THIS project's components, patterns, anti-patterns"
-<project>/CLAUDE.md                 # LLM-specific project rules
+~/.agentrc/                          # Global — roles, skills, commands (LLM-agnostic)
+<project>/.agentrc/                  # Project — directory symlinks to ~/.agentrc/ equivalents
+<project>/.claude/                   # LLM adapter — symlinks to .agentrc/ (Claude-specific)
 ```
+
+Concretely:
+- `~/.agentrc/roles/`, `~/.agentrc/skills/`, `~/.agentrc/commands/` hold the canonical definitions.
+- `<project>/.agentrc/skills/` → `~/.agentrc/skills/`, `<project>/.agentrc/commands/` → `~/.agentrc/commands/`, etc. (directory symlinks).
+- For Claude: `<project>/.claude/skills/` → `<project>/.agentrc/skills/`, `<project>/.claude/commands/` → `<project>/.agentrc/commands/`, plus a CLAUDE.md loader block. This is the LLM adapter layer.
+
+The `/agentrc-install install` skill sets up all of these symlinks automatically.
 
 When an agent boots in a project directory, it loads the global role definition plus the project-local context docs. The role provides deep technology knowledge. The project context provides specific conventions, component inventories, reference files, and anti-patterns unique to that codebase.
 
@@ -152,7 +159,15 @@ After context compaction in long sessions, the role and context files are automa
 
 ## Bootstrapping a New Project
 
-The fastest way to create accurate project context is to have an agent audit the codebase and draft it. Use the `agentrc-manage` skill:
+Start by installing the agentrc layer into the project:
+
+```
+/agentrc-install install
+```
+
+This creates `<project>/.agentrc/` with directory symlinks to `~/.agentrc/` (skills, commands, roles) and wires up the LLM adapter (for Claude: `.claude/skills/` → `.agentrc/skills/`, `.claude/commands/` → `.agentrc/commands/`, CLAUDE.md loader block).
+
+Then generate project context. The fastest way is to have an agent audit the codebase and draft it. Use the `agentrc-manage` skill:
 
 ```
 /agentrc-manage context hadron frontend

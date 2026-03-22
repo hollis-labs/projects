@@ -7,7 +7,7 @@ allowed-tools: Bash(nanite *), Bash(curl *)
 
 # NANITE
 
-Interact with the user's NANITE task and note manager via the `nanite` CLI (primary) or the local HTTP API (fallback when the CLI is not in PATH).
+Interact with the user's NANITE task and note manager. **Prefer the `nanite` CLI** (primary). Fall back to the local HTTP API only when the CLI is not in PATH.
 
 ## Live Configuration
 
@@ -19,7 +19,14 @@ Interact with the user's NANITE task and note manager via the `nanite` CLI (prim
 
 $ARGUMENTS
 
-Determine which operation is needed from the request above, then execute it with the `nanite` CLI using the vault information shown above.
+Parse the arguments to determine the operation:
+- Starts with `push` → Push to inbox
+- Starts with `search` → Search items
+- Starts with `inbox` → List inbox
+- Starts with `get` → Get item by ID
+- Starts with `vaults` → List vaults
+
+Execute with the `nanite` CLI using the vault information shown above.
 
 ---
 
@@ -138,9 +145,9 @@ nanite vaults
 
 ## HTTP API Reference (fallback)
 
-Use these if `nanite` is not in PATH but the app is running with the API enabled (Settings → Data → Enable local HTTP API).
+Use these **only** if `nanite` CLI is not in PATH. Check first: `which nanite 2>/dev/null`.
 
-Read PORT and API_KEY from `~/.config/nanite/config.json` (`apiPort`, `apiKey`).
+If falling back, read PORT and API_KEY from `~/.config/nanite/config.json` (`apiPort`, `apiKey`). If this file doesn't exist, report: "Nanite CLI not found and no API config at ~/.config/nanite/config.json."
 
 **Push to inbox:**
 ```bash

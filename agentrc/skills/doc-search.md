@@ -64,5 +64,6 @@ Display the formatted results list. No interpretation, no summary, no recommenda
 
 - This skill reads only. It never writes, updates, or deletes.
 - Results are returned as-is from Cortex. No filtering by the skill beyond what was requested.
-- If embeddings aren't available for semantic search, fall back to `context_view` with keyword matching and note that semantic search was unavailable.
+- If `context_rag_query` returns an error or empty results, fall back to `context_search` with keyword matching and note: "Semantic search unavailable, using keyword fallback."
+- If zero results after fallback, say: "No documents found matching query."
 - Default excludes deprecated records unless --status explicitly includes them.
