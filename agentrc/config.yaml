@@ -1,0 +1,22 @@
+# Global role defaults — available in all projects
+# Project-level .agentrc/config.yaml can override or extend these
+
+roles:
+  frontend:
+    file: frontend.md
+    description: React/Next.js/shadcn frontend specialist
+  backend:
+    file: backend.md
+    description: Go API and service specialist
+  code-review:
+    file: code-review.md
+    description: Reviews code for bugs, security, and standards
+  infra:
+    file: infra.md
+    description: Infrastructure, Docker, systemd, deployment
+  project-docs:
+    file: project-docs.md
+    description: Structured documentation maintainer (B2)
+  strategic-planner:
+    file: strategic-planner.md
+    description: Planning and scoping assistant (B3)

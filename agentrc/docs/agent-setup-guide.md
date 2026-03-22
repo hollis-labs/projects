@@ -101,7 +101,21 @@ touch <project>/.agentrc/data.md
    - **Anti-patterns to avoid** — With file references to past mistakes
    - **Reference implementations** — Point at the best examples in the codebase
 
-4. Commit `.agentrc/` to the project repo. It is part of the project, not personal config.
+4. Create a `config.yaml` to declare which roles apply to this project:
+
+```yaml
+# <project>/.agentrc/config.yaml
+roles:
+  frontend:
+    file: frontend.md
+  backend:
+    file: backend.md
+default_role: frontend
+```
+
+   The `file` field points to the context doc in the same `.agentrc/` directory. Available roles are defined globally in `~/.agentrc/config.yaml` — the project config maps them to local context files.
+
+5. Commit `.agentrc/` to the project repo. It is part of the project, not personal config.
 
 ### What makes a good context doc
 
@@ -119,21 +133,32 @@ touch <project>/.agentrc/data.md
 
 **Don't repeat what the role covers.** The role already says "use shadcn first." The project doc says "we have a custom `StatusBadge` that wraps shadcn Badge — use it instead of raw Badge for status displays."
 
+## Activating a Role
+
+Say "Boot <role>" at the start of a session:
+
+```
+Boot frontend
+```
+
+This triggers the loading chain (defined in `~/.claude/CLAUDE.md`):
+1. Read `~/.agentrc/roles/frontend.md` (global role definition)
+2. Check `.agentrc/config.yaml` in current directory for a context file mapping
+3. If found, read `.agentrc/frontend.md` (project-specific context)
+
+Without "Boot <role>", the session runs general-purpose with universal skills only.
+
+After context compaction in long sessions, the role and context files are automatically re-read (they're small — ~500-800 tokens).
+
 ## Bootstrapping a New Project
 
-The fastest way to create accurate project context is to have an agent audit the codebase and draft it.
-
-### Recommended flow
-
-1. **Boot a role agent in the project directory:**
+The fastest way to create accurate project context is to have an agent audit the codebase and draft it. Use the `agentrc-manage` skill:
 
 ```
-You are a frontend agent. Audit this codebase and generate a project context doc
-following the template at ~/.agentrc/templates/frontend-project.md.
-
-Read the codebase. Fill in every section with real file paths, real component names,
-and real patterns you observe. Don't leave template placeholders.
+/agentrc-manage context hadron frontend
 ```
+
+Or manually:
 
 2. **Review the generated doc.** The agent will get 80-90% right. You need to:
    - Correct any misidentified patterns
