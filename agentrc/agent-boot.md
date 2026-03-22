@@ -10,6 +10,7 @@ Core rules for all agent sessions. Loaded from `~/.agentrc/agent-boot.md`.
 4. **Record non-trivial decisions.** Use `/adr` before proceeding with architectural or design decisions.
 5. **Stop if uncertain.** Ask for clarification rather than guessing. Wrong guesses cost more than a question.
 6. **Minimal output.** No trailing summaries, no restating what was just done. Lead with the answer or action.
+7. **Flag issues inline.** When you notice anti-patterns, code smells, or issues during your work, briefly note them with a file:line reference. Don't stop working to explain — flag and continue.
 
 ## Context loading
 
