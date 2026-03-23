@@ -20,21 +20,21 @@ Launch an Agent with this prompt:
 You are a status reporter. Run the following queries and return ONLY a compact summary table. Do not include raw API output.
 
 1. Check active sprints:
-   - Use mcp__volon__volon_sprints_list with project_id=volon, limit=5
-   - For each active sprint, use mcp__volon__volon_tasks_list with sprint_id to get task counts by status
+   - Use mcp__engine__engine_sprints_list with project_id=engine, limit=5
+   - For each active sprint, use mcp__engine__engine_tasks_list with sprint_id to get task counts by status
 
 2. Check service health:
-   - curl -sf -o /dev/null -w "%{http_code}" http://127.0.0.1:8085/v1/tasks --max-time 2 (Volon)
+   - curl -sf -o /dev/null -w "%{http_code}" http://127.0.0.1:8085/v1/tasks --max-time 2 (Engine)
    - curl -sf -o /dev/null -w "%{http_code}" http://127.0.0.1:8080/v1/health/readiness --max-time 2 (Cortex)
    - curl -sf -o /dev/null -w "%{http_code}" http://127.0.0.1:8095/ --max-time 2 (Hadron)
 
 3. Check for any tasks in "doing" status (stuck work):
-   - Use mcp__volon__volon_tasks_list with status=doing, limit=5
+   - Use mcp__engine__engine_tasks_list with status=doing, limit=5
 
 Return this EXACT format and nothing else:
 
 === QSTATUS ===
-Services: Volon [UP/DOWN] | Cortex [UP/DOWN] | Hadron [UP/DOWN]
+Services: Engine [UP/DOWN] | Cortex [UP/DOWN] | Hadron [UP/DOWN]
 
 Active Sprints:
   <sprint-code>: <todo>t/<doing>d/<done>✓ of <total> [active/planned]

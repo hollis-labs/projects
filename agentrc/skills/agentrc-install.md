@@ -17,6 +17,7 @@ Install or uninstall the agentrc framework in a project directory. Creates the `
    ├── skills/       → symlink to ~/.agentrc/skills/
    ├── commands/     → symlink to ~/.agentrc/commands/
    ├── roles/        → symlink to ~/.agentrc/roles/
+   ├── agents/       → project-specific agent context files
    └── config.yaml   → project-local config (created from template if missing)
    ```
 
@@ -31,13 +32,16 @@ Install or uninstall the agentrc framework in a project directory. Creates the `
    # Project agentrc config
    agentrc_version: <version from ~/.agentrc/config.yaml>
 
-   # See ~/.agentrc/config.yaml for global role definitions
-   # Add project-specific role context mappings here.
+   # Define named agents that compose roles, skills, and project context.
+   # See ~/.agentrc/config.yaml for available roles and skills.
 
-   # roles:
-   #   frontend:
-   #     file: frontend.md
-   # default_role: frontend
+   # agents:
+   #   my-backend:
+   #     name: My Backend Engineer
+   #     description: Backend development for this project
+   #     roles: [backend, go]
+   #     skills: [go-build, go-lint, go-test]
+   #     context: backend.md
    ```
 
 2. **Install LLM adapter(s).** Default adapter is `claude`. Each adapter wires the LLM CLI to read from `.agentrc/`.
@@ -59,7 +63,8 @@ Install or uninstall the agentrc framework in a project directory. Creates the `
 
    ## agentrc
    - If `.agentrc/boot-prompt.md` exists, read it first for session context.
-   - If the user says "Boot <role>", read `~/.agentrc/roles/<role>.md`. Then check `.agentrc/config.yaml` for a context file mapping and read it too.
+   - If the user says "Boot <agent>", look up the agent in `.agentrc/config.yaml` under `agents:`. Load each role file from `~/.agentrc/roles/` (using the `file:` path from `~/.agentrc/config.yaml` role definitions), load the listed skills, and read the project context file from `.agentrc/` if specified.
+   - If the user says "Boot <role>" and no agent matches, fall back to loading that single role from `~/.agentrc/roles/` by type directory (domain/, stack/, meta/).
    - After context compaction, re-read the active role and project context files.
    - Do not guess when uncertain. Stop and ask.
    - Prefer focused, minimal output. No trailing summaries.
@@ -75,7 +80,43 @@ Install or uninstall the agentrc framework in a project directory. Creates the `
    - If they match, report: "agentrc is up to date (vX.Y.Z)."
    - If the project version is behind, report: "Updating agentrc from vX.Y.Z to vA.B.C." Update the `agentrc_version` field and continue with migration checks below.
 
-4. **Handle existing install (update/migrate):**
+4. **Archive v1/legacy content:**
+
+   Before modifying `.agentrc/`, check for legacy (pre-v2) artifacts. If ANY of the following exist, archive them to `.agentrc-legacy/`:
+
+   **Files to archive (move, not delete):**
+   - `.agentrc/agent-boot.md` — old boot doc
+   - `.agentrc/bootstrap.md` — old iteration state cache
+   - `<project-root>/agentrc.yaml` — old Volon-era config (lives in project root, not `.agentrc/`)
+
+   **Directories to archive (move, not delete):**
+   - `.agentrc/boot/` — old role profiles
+   - `.agentrc/pcc/` — old project context cache (may contain useful knowledge for auditor)
+   - `.agentrc/tasks/` — old task files
+   - `.agentrc/logs/` — old log files
+   - `.agentrc/state/` — old state files
+   - `.agentrc/backlog/` — old backlog files
+   - `.agentrc/templates/` — old template files
+
+   **Procedure:**
+   - Create `.agentrc-legacy/` if it doesn't already exist
+   - Move each found item into `.agentrc-legacy/`, preserving directory structure
+   - Report each archived item: "Archived: agent-boot.md → .agentrc-legacy/"
+   - If `.agentrc-legacy/` already exists, merge into it (don't overwrite existing archives)
+
+   **Do NOT archive:** `config.yaml`, `boot-prompt.md`, `agents/`, or any `*.md` context docs at `.agentrc/` root — these are handled in step 4b.
+
+4b. **Migrate context docs to `agents/` directory:**
+
+   Check for `*.md` files directly in `.agentrc/` (not in subdirs) that are NOT `config.yaml` or `boot-prompt.md`. These are likely v1 context docs (e.g., `frontend.md`, `backend.md`) that belong in `agents/`.
+
+   - Create `agents/` directory if it doesn't exist
+   - Move each context doc: `.agentrc/frontend.md` → `.agentrc/agents/frontend.md`
+   - If `agents/<name>.md` already exists, keep the existing one (don't overwrite)
+   - Check `config.yaml` agents section — if an agent references `context: agents/<name>.md` and that file was just moved, report: "Migrated context doc: <name>.md → agents/<name>.md"
+   - If a context doc exists but no agent in `config.yaml` references it, warn: "Found context doc <name>.md with no matching agent definition — add an agent entry to config.yaml"
+
+4c. **Handle existing install (update/migrate):**
 
    If `.agentrc/` already exists:
    - If `skills/`, `commands/`, or `roles/` are directory symlinks, verify they point to `~/.agentrc/` equivalents. Re-create if stale.

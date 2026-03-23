@@ -28,7 +28,7 @@ For each service, run via Bash:
 Services:
   | Service | URL | Endpoint |
   |---------|-----|----------|
-  | Volon GUI | http://127.0.0.1:8085 | /v1/tasks |
+  | Engine GUI | http://127.0.0.1:8085 | /v1/tasks |
   | Cortex | http://127.0.0.1:8080 | /v1/health/readiness |
   | Hadron | http://127.0.0.1:8095 | /v1/health |
   | Mentat | http://127.0.0.1:8090 | /api/health |
@@ -39,7 +39,7 @@ Also check Cerberus daemon:
 Return this EXACT format and nothing else:
 
 === QHEALTH ===
-Volon    [UP/DOWN]  <http_code>  <latency>ms
+Engine    [UP/DOWN]  <http_code>  <latency>ms
 Cortex   [UP/DOWN]  <http_code>  <latency>ms
 Hadron   [UP/DOWN]  <http_code>  <latency>ms
 Mentat   [UP/DOWN]  <http_code>  <latency>ms

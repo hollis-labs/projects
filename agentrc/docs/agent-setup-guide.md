@@ -1,105 +1,95 @@
 # Setting Up Project-Level Agent Configurations
 
-How to combine roles with project-specific context to create agents that know both the technology and your project's conventions.
+How to define agents that compose roles, skills, and project-specific context.
 
-## The Pattern: Role + Project Context
+## The Pattern: Roles + Skills + Context → Agent
 
 The agentrc system layers context in three tiers:
 
 ```
-~/.agentrc/                          # Global — roles, skills, commands (LLM-agnostic)
-<project>/.agentrc/                  # Project — directory symlinks to ~/.agentrc/ equivalents
+~/.agentrc/                          # Global — roles, skills, commands, config (LLM-agnostic)
+<project>/.agentrc/                  # Project — symlinks to global + agents/ context + config
 <project>/.claude/                   # LLM adapter — symlinks to .agentrc/ (Claude-specific)
 ```
 
 Concretely:
 - `~/.agentrc/roles/`, `~/.agentrc/skills/`, `~/.agentrc/commands/` hold the canonical definitions.
-- `<project>/.agentrc/skills/` → `~/.agentrc/skills/`, `<project>/.agentrc/commands/` → `~/.agentrc/commands/`, etc. (directory symlinks).
-- For Claude: `<project>/.claude/skills/` → `<project>/.agentrc/skills/`, `<project>/.claude/commands/` → `<project>/.agentrc/commands/`, plus a CLAUDE.md loader block. This is the LLM adapter layer.
+- `<project>/.agentrc/skills/` → `~/.agentrc/skills/`, etc. (directory symlinks).
+- `<project>/.agentrc/agents/` holds project-specific context files (not symlinked — unique per project).
+- `<project>/.agentrc/config.yaml` defines named agents that compose roles + skills + context.
+- For Claude: `<project>/.claude/` points through `<project>/.agentrc/`, plus a CLAUDE.md loader block.
 
-The `/agentrc-install install` skill sets up all of these symlinks automatically.
+The `/agentrc-install install` skill sets up all symlinks and scaffolding automatically.
 
-When an agent boots in a project directory, it loads the global role definition plus the project-local context docs. The role provides deep technology knowledge. The project context provides specific conventions, component inventories, reference files, and anti-patterns unique to that codebase.
+**Context beats instructions.** "Use `Panel` for card containers — see `components/ui/panel.tsx`" is more useful than "use appropriate components."
 
-This is the same pattern that makes the Vercel/Next.js plugin effective — it works because it injects deep framework knowledge (how App Router works, what server components can and cannot do, correct data fetching patterns) rather than generic instructions. The difference is that you control both layers and can make the project context as specific as your codebase requires.
+## Roles
 
-**Context beats instructions.** "Use `Panel` for card containers — see `components/ui/panel.tsx`" is more useful than "use appropriate components." The agent can read the reference file and match the pattern exactly.
+Roles live in `~/.agentrc/roles/` and are organized by type:
 
-## Creating a New Role
-
-Roles live in `~/.agentrc/roles/` and are technology-focused, not project-specific. They travel with you across all projects.
-
-### Steps
-
-1. Create a file in `~/.agentrc/roles/`:
-
-```bash
-touch ~/.agentrc/roles/backend.md
+```
+roles/
+├── domain/     # What kind of work (backend, frontend, code-review)
+├── stack/      # What tech (go, react, python)
+└── meta/       # Framework/tooling (agentrc-dev)
 ```
 
-2. Follow this structure:
+**Domain roles** define thinking — how to approach a problem space. No tech stack specifics.
+**Stack roles** define conventions — language idioms, tooling, project layout expectations.
+**Agents compose both:** `roles: [backend, go]` gives you backend thinking with Go conventions.
 
-```markdown
-# Role: Backend Agent
+### Creating a New Role
 
-## Identity
-You are a backend specialist building APIs with Go and PostgreSQL.
+Use the manage skill:
 
-## Stack
-- **Language:** Go 1.22+
-- **Framework:** Chi router
-- **Database:** PostgreSQL via pgx
-- **Auth:** JWT middleware
-
-## Rules
-1. Rule about preferred patterns
-2. Rule about error handling conventions
-3. Rule about testing expectations
-
-## When assigned to a project
-- What to read first (go.mod, migrations/, etc.)
-- What to check for before making assumptions
-
-## Handoff
-What to report when work is complete.
+```
+/agentrc-manage role domain backend "API, service, and data engineering"
+/agentrc-manage role stack python "Python language conventions and tooling"
 ```
 
-3. Key principles:
-   - **Technology, not project.** The role says "use Chi router." The project context says "routes go in `internal/api/routes.go`."
-   - **Opinionated defaults.** State your stack preferences clearly. "Server components by default" not "consider using server components."
-   - **Practical rules.** Each rule should prevent a specific mistake. If you can't point to a time the rule would have helped, cut it.
+Or manually create in `~/.agentrc/roles/{type}/{name}.md`. See existing roles for structure:
+- Domain example: `roles/domain/backend.md`
+- Stack example: `roles/stack/go.md`
+- Domain (non-coding) example: `roles/domain/code-review.md`
 
-### Existing roles to reference
+Key principles:
+- **Domain roles don't name technologies.** "Test behavior, not implementation" not "use pytest."
+- **Stack roles are opinionated.** "Standard layout: cmd/, internal/, pkg/" not "organize your code well."
+- **Every rule prevents a specific mistake.** If you can't point to a scenario where it helps, cut it.
 
-| Role | File | Purpose |
-|------|------|---------|
-| Frontend | `~/.agentrc/roles/frontend.md` | React/Next.js/shadcn specialist |
-| Code Review | `~/.agentrc/roles/code-review.md` | Review with BLOCK/WARN/NOTE severity |
-| Project Docs | `~/.agentrc/roles/project-docs.md` | Documentation maintenance |
-| Strategic Planner | `~/.agentrc/roles/strategic-planner.md` | Planning and roadmap |
+### Current roles
+
+| Type | Role | File | Purpose |
+|------|------|------|---------|
+| Domain | backend | `roles/domain/backend.md` | API, service, and data engineering |
+| Domain | frontend | `roles/domain/frontend.md` | UI architecture, components, and UX |
+| Domain | code-review | `roles/domain/code-review.md` | Review with BLOCK/WARN/NOTE severity |
+| Domain | project-docs | `roles/domain/project-docs.md` | Documentation maintenance |
+| Domain | strategic-planner | `roles/domain/strategic-planner.md` | Planning and roadmap |
+| Stack | go | `roles/stack/go.md` | Go language conventions |
+| Stack | react | `roles/stack/react.md` | React/Next.js/shadcn conventions |
+| Meta | agentrc-dev | `roles/meta/agentrc-dev.md` | agentrc framework development |
 
 ## Creating Project-Level Context
 
-Project context docs live in `<project>/.agentrc/` and give the role project-specific knowledge.
+Project context docs live in `<project>/.agentrc/agents/` and give agents project-specific knowledge.
 
 ### Steps
 
 1. Create the directory:
 
 ```bash
-mkdir -p <project>/.agentrc
+mkdir -p <project>/.agentrc/agents
 ```
 
-2. Create context docs for each domain the project touches:
+2. Create context docs for each agent profile the project needs:
 
 ```bash
-# For a full-stack project:
-touch <project>/.agentrc/frontend.md
-touch <project>/.agentrc/backend.md
-touch <project>/.agentrc/data.md
+touch <project>/.agentrc/agents/backend.md
+touch <project>/.agentrc/agents/frontend.md
 ```
 
-3. Fill in the context doc. Use the template at `~/.agentrc/templates/frontend-project.md` as a starting point for frontend projects. The key sections:
+3. Fill in the context doc. Use templates at `~/.agentrc/templates/` as starting points. Key sections:
 
    - **Stack** — Exact versions and libraries this project uses
    - **Project structure** — Directory layout with explanations
@@ -108,122 +98,181 @@ touch <project>/.agentrc/data.md
    - **Anti-patterns to avoid** — With file references to past mistakes
    - **Reference implementations** — Point at the best examples in the codebase
 
-4. Create a `config.yaml` to declare which roles apply to this project:
+4. Define agents in `<project>/.agentrc/config.yaml`:
 
 ```yaml
 # <project>/.agentrc/config.yaml
-roles:
-  frontend:
-    file: frontend.md
-  backend:
-    file: backend.md
-default_role: frontend
-```
+agentrc_version: 2.2.0
 
-   The `file` field points to the context doc in the same `.agentrc/` directory. Available roles are defined globally in `~/.agentrc/config.yaml` — the project config maps them to local context files.
+agents:
+  my-backend:
+    name: My Backend Engineer
+    description: Go backend development for this project
+    roles: [backend, go]
+    skills: [go-build, go-lint, go-test]
+    context: agents/backend.md
+
+  my-frontend:
+    name: My Frontend Developer
+    roles: [frontend, react]
+    context: agents/frontend.md
+
+  my-reviewer:
+    name: My Code Reviewer
+    roles: [code-review, go]
+    skills: [go-lint, go-test]
+```
 
 5. Commit `.agentrc/` to the project repo. It is part of the project, not personal config.
 
 ### What makes a good context doc
 
-**Be specific.** Every statement should reference a real file, component, or pattern in the codebase.
+**Be specific.** Every statement should reference a real file, component, or pattern.
 
 | Weak | Strong |
 |------|--------|
 | "Use appropriate components" | "Use `Panel` for card containers — see `components/ui/panel.tsx`" |
-| "Follow existing patterns" | "Data tables use the `DataTable` component with column definitions — see `components/tasks/task-table.tsx`" |
-| "Handle errors properly" | "All API routes use `handleApiError()` from `lib/errors.ts` — never return raw error objects" |
+| "Follow existing patterns" | "Data tables use `DataTable` with column defs — see `components/tasks/task-table.tsx`" |
+| "Handle errors properly" | "All API routes use `handleApiError()` from `lib/errors.ts`" |
 
-**Include reference files.** Point at 2-3 canonical implementations that show the right way to do things. The agent will read them and match the pattern.
+**Include reference files.** Point at 2-3 canonical implementations. The agent reads them and matches.
 
-**Document anti-patterns with evidence.** "Don't pass props through 3+ layers — see the refactor in `components/dashboard/` where this caused a maintenance problem."
+**Document anti-patterns with evidence.** Not "don't do X" but "don't do X — see the refactor in `components/dashboard/` where this caused problems."
 
-**Don't repeat what the role covers.** The role already says "use shadcn first." The project doc says "we have a custom `StatusBadge` that wraps shadcn Badge — use it instead of raw Badge for status displays."
+**Don't repeat what roles cover.** The role says "use shadcn first." The project doc says "we have a custom `StatusBadge` that wraps Badge — use it for status displays."
 
-## Activating a Role
+## Activating an Agent
 
-Say "Boot <role>" at the start of a session:
+Say "Boot <agent>" at the start of a session:
 
 ```
-Boot frontend
+Boot cerberus-backend
 ```
 
-This triggers the loading chain (defined in `~/.claude/CLAUDE.md`):
-1. Read `~/.agentrc/roles/frontend.md` (global role definition)
-2. Check `.agentrc/config.yaml` in current directory for a context file mapping
-3. If found, read `.agentrc/frontend.md` (project-specific context)
+This triggers the loading chain:
+1. Look up `cerberus-backend` in `.agentrc/config.yaml` under `agents:`
+2. Load each role: `~/.agentrc/roles/domain/backend.md`, `~/.agentrc/roles/stack/go.md`
+3. Load listed skills from `~/.agentrc/skills/`
+4. Read context: `.agentrc/agents/backend.md`
 
-Without "Boot <role>", the session runs general-purpose with universal skills only.
+If no agent matches, falls back to loading a single role by name (checks domain/, stack/, meta/).
 
-After context compaction in long sessions, the role and context files are automatically re-read (they're small — ~500-800 tokens).
+Without "Boot <agent>", the session runs general-purpose with universal skills only.
+
+After context compaction, role and context files are re-read automatically (~500-800 tokens each).
 
 ## Bootstrapping a New Project
 
-Start by installing the agentrc layer into the project:
+1. Install agentrc:
 
 ```
 /agentrc-install install
 ```
 
-This creates `<project>/.agentrc/` with directory symlinks to `~/.agentrc/` (skills, commands, roles) and wires up the LLM adapter (for Claude: `.claude/skills/` → `.agentrc/skills/`, `.claude/commands/` → `.agentrc/commands/`, CLAUDE.md loader block).
+Creates `.agentrc/` with symlinks and wires the LLM adapter.
 
-Then generate project context. The fastest way is to have an agent audit the codebase and draft it. Use the `agentrc-manage` skill:
+2. Generate context by having an agent audit the codebase:
 
 ```
-/agentrc-manage context hadron frontend
+/agentrc-manage context hadron backend
 ```
 
-Or manually:
+3. **Review the generated doc.** The agent gets 80-90% right. You need to:
+   - Correct misidentified patterns
+   - Add anti-patterns from experience (agent can't see git history)
+   - Verify reference implementations are good examples
+   - Remove anything generic that roles already cover
 
-2. **Review the generated doc.** The agent will get 80-90% right. You need to:
-   - Correct any misidentified patterns
-   - Add anti-patterns you know about from experience (the agent can't see git history)
-   - Verify the reference implementations are actually good examples
-   - Remove anything generic that the role already covers
+4. **Define agents** in `.agentrc/config.yaml` composing the roles and context.
 
-3. **Commit the result:**
+5. **Commit:**
 
 ```bash
 git add .agentrc/
 git commit -m "Add agent project context"
 ```
 
-4. **Maintain it.** When patterns change, update the context doc. The Project Docs agent (`~/.agentrc/roles/project-docs.md`) can help keep it current — run it periodically to check if the docs still match the code.
+6. **Maintain it.** When patterns change, update context docs. The Project Docs role can help.
 
 ## Skill Tiers
-
-Skills are markdown files that give agents specific capabilities. They are organized in three tiers:
 
 ### Universal skills
 
 Location: `~/.agentrc/skills/`
 
-Available to every agent in every project. These are general-purpose operations that aren't tied to any specific technology or codebase.
-
-Examples: `adr` (decision capture), `doc-note` (documentation), `boot-prompt` (session handoff), `qstatus` (status checks).
-
-### Role skills (future)
-
-Location: `~/.agentrc/roles/<role>/skills/`
-
-Loaded only when a specific role is active. A frontend role might include skills for component scaffolding; a backend role might include skills for migration generation. Not yet implemented — currently all role-specific knowledge lives in the role definition itself.
+Available everywhere. General-purpose operations not tied to any technology or codebase.
+Examples: `adr`, `doc-note`, `boot-prompt`, `qstatus`.
 
 ### Project skills
 
-Location: `<project>/.agentrc/skills/`
+Location: `<project>/.agentrc/skills/` (via symlink, inherits universal skills automatically)
 
-For operations unique to a specific project. Use these sparingly — if a skill could apply to other projects using the same stack, it probably belongs at the role or universal level.
-
-Examples: a skill that runs a project-specific deployment pipeline, a skill that generates boilerplate matching the project's exact patterns, a skill that queries a project-specific internal API.
-
-### When to create a project skill
+For operations unique to a specific project. Use sparingly — if a skill could apply across projects, it belongs at the universal level.
 
 Create a project skill when:
-- The operation is unique to this project (not generalizable)
-- It involves project-specific file paths, services, or conventions
-- You find yourself repeatedly explaining the same multi-step procedure to agents
+- The operation is unique to this project
+- It involves project-specific paths, services, or conventions
+- You find yourself repeatedly explaining the same multi-step procedure
 
 Don't create a project skill when:
-- The role definition or project context doc can cover it
+- A role or context doc can cover it
 - It's a one-off operation
 - It duplicates a universal skill with minor variations
+
+## Vendor Plugins
+
+Vendor plugins are third-party skills installed via the Claude CLI. They provide deep framework knowledge maintained by the vendor (e.g., Vercel's Next.js plugin knows App Router patterns, server component rules, data fetching conventions). agentrc does not manage these — they are installed and updated separately.
+
+### Installing a vendor plugin
+
+Install at project scope so the plugin is only active in projects that need it:
+
+```bash
+cd <project>
+claude plugins install <plugin-name> --scope project
+```
+
+Example — adding Vercel/Next.js support to a frontend project:
+
+```bash
+cd ~/Projects-apps/hadron
+claude plugins install vercel --scope project
+```
+
+Do NOT install vendor plugins at `user` scope (global) unless every project needs them. Project scope keeps the plugin's context injection targeted to the projects where it's relevant.
+
+### Declaring plugin dependencies in agent config
+
+After installing a plugin, declare it in the agent's config so that agents and humans know it's expected:
+
+```yaml
+# <project>/.agentrc/config.yaml
+agents:
+  my-frontend:
+    name: My Frontend Developer
+    roles: [frontend, react]
+    plugins: [vercel]              # vendor plugins this agent depends on
+    context: agents/frontend.md
+```
+
+The `plugins:` key is informational — it documents what the agent expects to be installed. It does not auto-install anything. If a listed plugin is missing, the agent should flag it rather than silently degrade.
+
+### Managing plugins
+
+```bash
+claude plugins list                              # show installed plugins
+claude plugins install <name> --scope project    # install for this project
+claude plugins uninstall <name> --scope project  # remove from this project
+claude plugins enable <name>                     # re-enable a disabled plugin
+claude plugins disable <name>                    # disable without removing
+```
+
+### agentrc skills vs vendor plugins
+
+| | agentrc skills | Vendor plugins |
+|---|---|---|
+| **Source** | `~/.agentrc/skills/` | `claude plugins install` |
+| **Managed by** | You | Plugin vendor |
+| **Scope** | Global (via symlinks) | Per-project or per-user |
+| **Declared in** | `skills: [...]` in agent config | `plugins: [...]` in agent config |
+| **Examples** | `go-build`, `adr`, `doc-note` | `vercel`, `typescript-lsp` |

@@ -1,7 +1,7 @@
 # Backend Context — {PROJECT_NAME}
 
-> Project-specific backend conventions. Loaded by the backend agent role when working in this project.
-> Lives at `<project>/.agentrc/backend.md`.
+> Project-specific backend conventions. Loaded as agent context when working in this project.
+> Lives at `<project>/.agentrc/agents/backend.md`.
 
 ## Stack
 

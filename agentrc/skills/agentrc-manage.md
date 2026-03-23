@@ -19,9 +19,9 @@ This skill MUST be executed via the Agent tool (subagent) to keep the main conte
 ```
 
 **Examples:**
-- `/agentrc-manage role backend "Go API specialist with Chi and PostgreSQL"`
-- `/agentrc-manage role infra "Infrastructure and DevOps with Docker and systemd"`
-- `/agentrc-manage role data "Data pipeline and ETL specialist"`
+- `/agentrc-manage role domain backend "API, service, and data engineering"`
+- `/agentrc-manage role stack python "Python language conventions and tooling"`
+- `/agentrc-manage role meta infra-ops "Infrastructure and DevOps tooling"`
 
 **Procedure:** Launch a sub-agent with:
 
@@ -30,31 +30,30 @@ You are building a new agent role definition for the agentrc system.
 
 ## Role to create
 - Name: {NAME}
+- Type: {TYPE} (domain, stack, or meta)
 - Description: {DESCRIPTION}
 
 ## Steps
 
-1. Read the existing roles for reference:
-   - ~/.agentrc/roles/frontend.md (example of a well-structured role)
-   - ~/.agentrc/roles/code-review.md (example of a non-coding role)
+1. Read existing roles for reference:
+   - Domain example: ~/.agentrc/roles/domain/backend.md (domain thinking, no tech stack)
+   - Stack example: ~/.agentrc/roles/stack/go.md (language conventions and tooling)
+   - Domain example: ~/.agentrc/roles/domain/code-review.md (non-coding domain role)
 
 2. Read the guide: ~/.agentrc/docs/agent-setup-guide.md — section "Creating a New Role"
 
-3. Write the role file to: ~/.agentrc/roles/{NAME}.md
+3. Write the role file to: ~/.agentrc/roles/{TYPE}/{NAME}.md
 
-   Follow this structure exactly:
+   For **domain** roles (what kind of work):
    ```markdown
-   # Role: {Title} Agent
+   # Role: {Title}
 
    ## Identity
-   One sentence: who you are and what you specialize in.
+   One sentence: what kind of work you focus on.
 
-   ## Stack
-   Bullet list of technologies, frameworks, tools this role uses.
-
-   ## Rules
-   Numbered list of opinionated, specific rules. Each rule should prevent a concrete mistake.
-   No generic advice. Every rule should be actionable.
+   ## Thinking
+   Bullet list of how you approach problems in this domain.
+   No tech stack specifics — those come from stack roles.
 
    ## When assigned to a project
    What to read first, what to check before making assumptions.
@@ -63,13 +62,33 @@ You are building a new agent role definition for the agentrc system.
    What to report when work is complete or blocked.
    ```
 
-4. Key principles:
-   - Be opinionated. State preferences, don't hedge.
-   - Technology-focused, not project-specific. The role says "use Chi router." The project context says "routes go in internal/api/routes.go."
-   - Each rule should prevent a specific mistake. If you can't point to a scenario where the rule helps, cut it.
-   - Don't duplicate what agent-boot.md already covers (Engine is truth, stop if uncertain, etc.)
+   For **stack** roles (what tech):
+   ```markdown
+   # Role: {Title} Stack
 
-5. Return ONLY: ✓ Created role: ~/.agentrc/roles/{NAME}.md — {one-line summary}
+   ## Identity
+   One sentence: what language/framework conventions you follow.
+   Note: this role is combined with a domain role.
+
+   ## Stack
+   Bullet list of technologies, frameworks, tools.
+
+   ## Rules
+   Numbered list of opinionated, specific rules.
+
+   ## When assigned to a project
+   What project files to read first.
+   ```
+
+4. Key principles:
+   - Domain roles define *thinking* — how to approach the problem space
+   - Stack roles define *conventions* — language idioms and tooling
+   - Agents compose both: `roles: [backend, go]`
+   - Don't duplicate what agent-boot.md already covers
+
+5. Also register the role in ~/.agentrc/config.yaml under the `roles:` section.
+
+6. Return ONLY: ✓ Created role: ~/.agentrc/roles/{TYPE}/{NAME}.md — {one-line summary}
 ```
 
 ## Mode 2: Create Project Context
@@ -93,7 +112,7 @@ You are auditing a project's codebase to generate a project-level context doc fo
 ## Target
 - Project: {PROJECT}
 - Domain: {DOMAIN}
-- Project root: {resolve from user input, or check `~/Projects-apps/{PROJECT}/` as default. Ask user if not found.}
+- Project root: {resolve from ~/.agentrc/config.yaml projects section, or check `~/Projects-apps/{PROJECT}/` as default. Ask user if not found.}
 
 ## Steps
 
@@ -127,13 +146,13 @@ You are auditing a project's codebase to generate a project-level context doc fo
    - **Reference implementations** — 2-3 well-structured files that exemplify good patterns
    - **Recommendations** — prioritized list of improvements
 
-5. Create the .agentrc directory if needed:
-   mkdir -p {PROJECT_ROOT}/.agentrc
+5. Create the .agentrc/agents directory if needed:
+   mkdir -p {PROJECT_ROOT}/.agentrc/agents
 
-6. Write the context doc to: {PROJECT_ROOT}/.agentrc/{DOMAIN}.md
+6. Write the context doc to: {PROJECT_ROOT}/.agentrc/agents/{DOMAIN}.md
 
 7. Return ONLY:
-   ✓ Created context: {PROJECT_ROOT}/.agentrc/{DOMAIN}.md
+   ✓ Created context: {PROJECT_ROOT}/.agentrc/agents/{DOMAIN}.md
    — {total files audited}, {number of anti-patterns found}, {number of recommendations}
 ```
 
@@ -214,6 +233,6 @@ You are building a new skill for the agentrc system.
 
 - ALWAYS run via sub-agent for all three modes.
 - ALWAYS read existing examples before generating. Match the conventions.
-- If the project is not found in projects.yaml (for context mode), ask the user for the path. Do not guess.
+- If the project is not found in ~/.agentrc/config.yaml projects section (for context mode), ask the user for the path. Do not guess.
 - Generated files must be complete and usable — no TODO placeholders, no "fill this in later."
 - For context mode: the audit must actually read the codebase. Do not generate generic content.

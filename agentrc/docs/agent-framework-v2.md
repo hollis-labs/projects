@@ -1,103 +1,211 @@
-# Agent Framework v2 — Design Guide
+# Agent Framework v2.2 — Design Guide
 
-Reference document for building and maintaining the Nexus/agentrc agent framework.
+Reference document for the agentrc agent framework. This document should always reflect the current state of the system. When the framework changes, the agentrc-dev role is responsible for updating this doc.
 
 ## Core Principles
 
-1. **Task context, not system context.** Agents need to know what they're doing, not the history of the project.
+1. **Composition over monoliths.** Agents compose domain roles + stack roles + skills + project context. No single file tries to do everything.
 2. **If uncertain, stop and ask.** Guessing signals an incomplete system. "Context Needed" is a valid status.
 3. **Focused agents > general agents.** Load context for the task, not the universe.
 4. **Skills for knowledge, hooks for enforcement.** Skills load on demand. Hooks run silently unless they block.
 5. **Sub-agent output isolation.** Heavy work runs in sub-agents. Main context gets one-line confirmations.
 6. **Progressive context disclosure.** Boot gives identity + task. Skills give procedure. Cortex gives memory.
 
-## Boot Contract
+## Agent Model
 
-Every agent session starts with this and nothing more:
+An agent is a named configuration that composes roles, skills, and project context:
 
-```markdown
-# Agent Boot
-
-## Identity
-You are [role]. [What you do. What you don't do.]
-
-## Task
-[Specific task. Acceptance criteria. Quality bar.]
-
-## Rules
-1. If uncertain about correctness, stop and ask.
-2. [2-3 task-specific constraints]
-3. When all steps complete and conditions met, report done.
-
-## Tools
-[MCP servers, permissions]
+```yaml
+agents:
+  cerberus-backend:
+    name: Cerberus Backend Engineer
+    description: Go service development for the Cerberus daemon
+    roles: [backend, go]           # domain + stack
+    skills: [go-build, go-lint, go-test]
+    plugins: [vercel]              # vendor plugins (claude plugins install)
+    context: agents/backend.md     # project-specific context
+    # Future extensions:
+    # voice_profile: ...
+    # permissions: { ... }
+    # model_strategy: { ... }
+    # settings: { ... }
 ```
 
-**Budget: under 1K tokens.** If it's longer, you're loading system context.
+### Activation
 
-### What does NOT go in boot:
-- Portfolio state, epic counts, session history
-- Multiplexor routing rules (framework concern)
-- Project identity/goals/non-goals
-- Bootstrap.md (eliminated)
+"Boot <agent-slug>" loads the agent config from `.agentrc/config.yaml`:
+1. Resolve each role from `~/.agentrc/roles/{type}/{name}.md`
+2. Load listed skills from `~/.agentrc/skills/`
+3. Check `plugins:` — vendor plugins should already be installed at project scope via `claude plugins install`
+4. Read context file from `.agentrc/` (relative to project)
 
-### The task section does the heavy lifting
-The task's acceptance criteria tells the agent how rigorous to be, what "done" looks like, and implicitly how much to polish. Bad: "Refactor the auth module." Good: "Refactor auth module to extract middleware into /lib/auth.ts. Acceptance: existing tests pass, no new dependencies. Exploratory — working is enough."
+Fallback: "Boot <role-name>" loads a single role if no agent matches.
 
-## Task Capsule Standard
+### Nexus compatibility
 
-```markdown
-# Task: [ID]
+The agent config schema maps directly to Nexus `AgentConfig`:
+- `roles` → `capabilities.roles` + `capabilities.domains`
+- `skills` → skill assignments (many-to-many)
+- `plugins` → vendor plugin dependencies (informational, not auto-installed)
+- `context` → project-specific settings/system_prompt content
+- Future fields (`voice_profile`, `permissions`, `model_strategy`) map to their Nexus equivalents
 
-## What
-[1-2 sentences: what to build/fix/change]
+An agentrc agent config can be serialized into a Nexus `RegisterInput` for DB-backed agent infrastructure.
 
-## Where
-[File paths, repo, branch]
+## Role Architecture
 
-## Acceptance
-- [ ] Condition 1
-- [ ] Condition 2
+Roles are organized by type in `~/.agentrc/roles/`:
 
-## Context (optional)
-[Links to ADRs, decisions, constraints. NOT project history.]
+```
+roles/
+├── domain/     # What kind of work (backend, frontend, code-review, auditor)
+├── stack/      # What tech (go, react)
+└── meta/       # Framework/tooling (agentrc-dev)
 ```
 
-**Required:** What, Where, Acceptance. If an orchestrator can't fill Where or Acceptance concretely, the task isn't ready.
+**Domain roles** define thinking — how to approach a problem space. No tech stack specifics.
+**Stack roles** define conventions — language idioms, tooling, project layout.
+**Meta roles** are for framework development and don't compose with other roles.
+
+Agents compose domain + stack: `[backend, go]`, `[frontend, react]`, `[auditor, go]`.
+
+### Current roles
+
+| Type | Role | Purpose |
+|------|------|---------|
+| domain | backend | API, service, and data engineering (`## What NOT to do` section) |
+| domain | frontend | UI architecture, components, and UX (`## What NOT to do` section) |
+| domain | code-review | Code review with BLOCK/WARN/NOTE severity |
+| domain | project-docs | Structured documentation maintenance |
+| domain | strategic-planner | Planning and scoping |
+| domain | auditor | Codebase auditing for agent context docs |
+| stack | go | Go language conventions and tooling |
+| stack | react | React/Next.js/shadcn/Tailwind conventions |
+| meta | agentrc-dev | agentrc framework development |
+
+## Project Structure
+
+### Source (`~/.agentrc/`)
+
+```
+~/.agentrc/
+├── config.yaml        # Global config: version, roles, agent schema, projects
+├── agent-boot.md      # Session boot rules (loaded at session start)
+├── roles/             # Role definitions (domain/, stack/, meta/)
+├── skills/            # Skill definitions (procedures)
+├── commands/          # Command stubs (slash command entry points)
+├── templates/         # Context doc templates, CLAUDE.md template
+├── docs/              # Framework documentation (this file)
+└── hooks/             # Hook scripts (enforcement)
+```
+
+### Project install (`<project>/.agentrc/`)
+
+```
+<project>/.agentrc/
+├── config.yaml        # Project config: version, named agents
+├── agents/            # Project-specific context docs
+├── skills → ~/.agentrc/skills
+├── commands → ~/.agentrc/commands
+└── roles → ~/.agentrc/roles
+```
+
+### LLM adapter (`<project>/.claude/`)
+
+```
+<project>/.claude/
+├── skills → ../.agentrc/skills
+└── commands → ../.agentrc/commands
+```
+
+Plus a CLAUDE.md loader block in the project root. The `templates/CLAUDE.md` template contains the canonical agentrc loader block — this is what `agentrc-install` writes during setup.
+
+### Legacy archive (`<project>/.agentrc-legacy/`)
+
+Created by the install procedure when pre-v2 artifacts are found. Standard archive location for v1/legacy content during migration.
+
+Files archived: `agent-boot.md`, `bootstrap.md`, `agentrc.yaml` (from project root).
+Directories archived: `boot/`, `pcc/`, `tasks/`, `logs/`, `state/`, `backlog/`, `templates/`.
+
+Any `*.md` context docs found in `.agentrc/` root (not in `agents/`) are moved to `.agentrc/agents/` with a warning if no agent definition references the migrated doc.
 
 ## Skill Design Rules
 
 ### Output contracts matter
-Every skill must define its output format. "Return ONLY this format" prevents agents from narrating, explaining, and suggesting — all of which pollute the caller's context window.
+Every skill defines its output format. "Return ONLY this format" prevents agents from narrating and polluting the caller's context window.
 
 ### Sub-agent pattern for write operations
-Skills that create/modify artifacts should run via sub-agent. The sub-agent does the work, main context gets a one-line confirmation. See: adr, blg, doc-note.
+Skills that create/modify artifacts run via sub-agent. Main context gets a one-line confirmation.
 
 ### Read operations run inline
-Skills that retrieve data (doc-search, qstatus) run in the main context because the caller needs the results.
+Skills that retrieve data run in the main context because the caller needs the results.
 
 ### Context cost awareness
-Everything an agent outputs — summaries, insights, explanations, tables — consumes context window tokens. There is no separate channel. Design skills to produce minimal, structured output. A 500-line status report actively harms the agent's next task.
+Everything an agent outputs consumes context window tokens. Design skills to produce minimal, structured output.
 
-### Scoping
-Skills should only load when relevant. Frontend skills for frontend tasks, planning skills for planning sessions. Don't load everything at boot.
+### Current skills
+
+18 skills total: 17 `.md` files + 1 `nanite/` directory.
+
+| Skill | Purpose | Mode |
+|-------|---------|------|
+| adr | Architectural decision capture | sub-agent |
+| blg | Quick backlog capture | sub-agent |
+| doc-note | Store docs in Cortex | sub-agent |
+| doc-search | Query docs from Cortex | inline |
+| boot-prompt | Session handoff document | manual |
+| qstatus | Compact status snapshot | sub-agent |
+| qhealth | Service health check | sub-agent |
+| hadron-run | Blueprint execution | sub-agent |
+| standup | Standup from activity + git | sub-agent |
+| escalate | Convert blockers to repair tasks | sub-agent |
+| blueprint-builder | Hadron blueprint generation | sub-agent |
+| vault-search | Nanite vault search | inline |
+| go-build | Build Go project | inline |
+| go-lint | Lint Go project | inline |
+| go-test | Run Go tests | inline |
+| agentrc-install | Install/uninstall agentrc | inline |
+| agentrc-manage | Create roles, context, skills | sub-agent |
+| nanite/ | Nanite knowledge vault skills | inline |
+
+### Current commands
+
+18 command stubs in `~/.agentrc/commands/`. Each is a slash-command entry point that delegates to its matching skill.
+
+| Command | Delegates to | Notes |
+|---------|-------------|-------|
+| /adr | adr | |
+| /blg | blg | |
+| /doc-note | doc-note | |
+| /doc-search | doc-search | |
+| /qstatus | qstatus | |
+| /qhealth | qhealth | |
+| /health-check | qhealth | Alias — redirects to `/qhealth` |
+| /hadron-run | hadron-run | Run a Hadron blueprint |
+| /standup | standup | Generate standup report from recent activity |
+| /escalate | escalate | Convert a blocker into a repair task |
+| /blueprint-builder | blueprint-builder | Generate a Hadron blueprint from description |
+| /vault-search | vault-search | Search Nanite knowledge vaults |
+| /go-build | go-build | |
+| /go-lint | go-lint | |
+| /go-test | go-test | |
+| /agentrc-install | agentrc-install | |
+| /agentrc-manage | agentrc-manage | |
+| /boot-prompt | boot-prompt | |
 
 ## Hook Design Rules
 
 ### Hooks should be silent unless they block
-Good: envelope-guard blocks a write and explains why. Bad: audit hook logs every operation to a file and adds confirmation text.
+Good: envelope-guard blocks a write and explains why. Bad: audit hook logs every operation.
 
 ### Hooks for enforcement, not capture
-Use hooks to prevent bad actions (writes to protected paths, recursive agent spawning). Don't use hooks for logging, session capture, or context injection — those should be manual skills.
-
-### Beware plugin hooks injecting without consent
-External plugins (Vercel, learning-output-style, etc.) inject skills via SessionStart and PreToolUse hooks based on keyword matching. This silently: adds thousands of tokens per turn, activates behavior modes (like "learning mode") you didn't ask for, and forces skill injections via "You must run Skill(X)" directives. Evaluate every plugin for what it injects and when.
+Use hooks to prevent bad actions. Don't use hooks for logging or context injection.
 
 ## Namespace Convention (Cortex)
 
 ```
 {project}/
-├── docs/          # Project documentation (system/map, decision/adr, etc.)
+├── docs/          # Project documentation
 ├── history/       # Session snapshots, summaries
 ├── plans/         # Active plans, roadmaps
 └── context/       # Agent-generated context
@@ -106,49 +214,77 @@ _shared/
 └── docs/          # Cross-project documentation
 ```
 
-Namespace topology mirrors how context is consumed. An agent working on `engine` grabs `engine/*` and gets everything scoped to that project in one query.
-
 ### Keys
-Auto-generated timestamps (YYYYMMDD-HHMMSS-4random). Never human-meaningful. Meaning emerges from namespace, type, tags, and search — not key names.
+Auto-generated timestamps (YYYYMMDD-HHMMSS-4random). Meaning from namespace, type, tags, and search.
 
 ### Lifecycle
-All agent writes start as `draft`. Promotion to `canonical` requires explicit action. Use `note/volatile` (14-day TTL) for rough thoughts.
+All agent writes start as `draft`. Promotion to `canonical` requires explicit action.
 
-## Active Skills (v2)
+## Config Schema (v2.2.0)
 
-### Keep
-| Skill | Purpose |
-|-------|---------|
-| adr | Decision capture via sub-agent |
-| blg | Quick backlog capture via sub-agent |
-| doc-note | Store docs in Cortex (NEW) |
-| doc-search | Query docs from Cortex (NEW) |
-| boot-prompt | Manual session handoff (NEW) |
-| health-check | Service health dashboard |
-| qstatus | Compact status via sub-agent |
-| qhealth | Compact health via sub-agent |
-| hadron-run | Blueprint execution + escalation |
-| standup | Standup from task activity + git |
-| escalate | Convert blockers to repair tasks |
-| blueprint-builder | Hadron blueprint generation |
-| playwright-bowser | Browser automation |
-| build-conduit-plugin | Conduit plugin builder |
-| build-envelope-component | Envelope UI builder |
-| vault-search | Nanite vault search |
+Single config file at `~/.agentrc/config.yaml`:
 
-### Deferred (redesign needed)
-epic-plan, epic-summary, sprint-review, sprint-retro, task-triage, planning-session, deep-review, code-review, drift-resolve, git-cleanup, memory-audit, session-handoff, workflow-feature-branch, volon-planning, git-status-all, delegate, delegate-prompt
+```yaml
+version: 2.2.0
 
-### Dropped
-check-inbox, send-message, init-lead, agent-list, agent-status, workflow-portfolio-boot, workflow-session-end-capture, workflow-sprint-lifecycle, workflow-drift-detection, pcc-refresh-all, pcc-sync, project-onboard, cross-impact, commit-all, reorient, worktree-cleanup, discover-tools, sigil-ui, phase-sync
+roles:
+  <name>:
+    file: <type>/<name>.md    # relative to roles/
+    type: domain | stack | meta
+    description: <one-liner>
 
-## Active Hooks (v2)
+projects:
+  <slug>:
+    root: <path>
+    lang: <language>
+    description: <one-liner>
+```
 
-| Hook | Action | Notes |
-|------|--------|-------|
-| envelope-guard | KEEP | Blocks writes to protected paths |
-| prevent-recursive-agents | KEEP (relaxed) | Depth limit, not role-based |
-| session-inject | REDESIGN | Minimal boot only, not full bootstrap |
-| audit | DROP | Nobody reads the logs |
-| worktree-check | DROP | Warning only, low value |
-| session-end | DROP | Legacy cleanup |
+### Project registry
+
+The global config lists both monorepos and individual modules as first-class project entries. Current registered projects (all on v2.2.0):
+
+| Slug | Description |
+|------|-------------|
+| cerberus | — |
+| hadron | — |
+| nanite | — |
+| nexus | — |
+| carrier | — |
+| sigil | — |
+| lnklst | — |
+| suds-v2 | — |
+| fragmentsengine.com | — |
+| agent-workspaces | — |
+| fragments-engine | Monorepo root |
+| engine | Fragments Engine Core (task/sprint/project management, Nexus agent routing) |
+| conduit | Chat interface and conversation management |
+| cortex | Context memory, RAG, and document storage |
+| libs | Shared libraries (MCP, OTel, plugin, toolbroker) |
+
+`engine`, `conduit`, `cortex`, and `libs` are modules within the `fragments-engine` monorepo, listed individually so agents can scope to a single module.
+
+Project-level config at `<project>/.agentrc/config.yaml`:
+
+```yaml
+agentrc_version: 2.2.0
+
+agents:
+  <slug>:
+    name: <display name>
+    description: <one-liner>
+    roles: [<role>, ...]
+    skills: [<skill>, ...]
+    plugins: [<plugin>, ...]       # vendor plugins (informational)
+    context: agents/<file>.md
+```
+
+## MCP Tool Namespace
+
+All skills and commands reference `mcp__engine__*` tools. The legacy `mcp__volon__*` namespace is no longer used. The service was previously labeled "Volon"; it is now "Engine" throughout.
+
+## Version History
+
+- **v2.2.0** — Agent composition model. Roles split into domain/stack/meta. Named agents in project config. projects.yaml absorbed into config.yaml. Context files moved to agents/ dir. 18 skills, 18 commands. Monorepo modules registered as individual projects. Legacy archive convention (`.agentrc-legacy/`). `mcp__engine__*` replaces `mcp__volon__*`. `backend` and `frontend` roles gain `## What NOT to do` sections. `/health-check` aliased to `/qhealth`. All 14 portfolio projects on v2.2.0.
+- **v2.1.0** — Install/uninstall system. Directory symlinks. Three-tier install model.
+- **v2.0.0** — Initial framework. Roles, skills, commands, hooks.

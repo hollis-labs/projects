@@ -26,7 +26,7 @@ Generate a standup report from recent task completions and git activity across m
    ```bash
    git -C <project_path> log --oneline --since="<N> hours ago" --format="%h %s" 2>/dev/null
    ```
-   If the workspace has a `.agentrc/config.yaml` with a `repos` key, use those paths. Otherwise, use the current working directory only.
+   If the workspace has a `.agentrc/config.yaml` with a `projects` key, use those paths. Otherwise, use the current working directory only.
 
 3. **Check blockers.** Use `mcp__engine__engine_tasks_list` filtered to blocked status.
 

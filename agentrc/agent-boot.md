@@ -1,4 +1,4 @@
-# Agent Boot — v2
+# Agent Boot — v2.2
 
 Core rules for all agent sessions. Loaded from `~/.agentrc/agent-boot.md`.
 
@@ -16,29 +16,30 @@ Core rules for all agent sessions. Loaded from `~/.agentrc/agent-boot.md`.
 
 When booting in a directory:
 
-1. Check `./boot-prompt.md` or `./.agentrc/boot-prompt.md` — session context from a previous handoff.
-2. Check `~/.agentrc/projects.yaml` — if the directory matches a registered project, note project metadata.
-3. Check `./.agentrc/config.yaml` — project-local role config and overrides.
-4. Check `./CLAUDE.md` — project-specific rules (Claude only).
+1. Check `./.agentrc/boot-prompt.md` — session context from a previous handoff.
+2. Check `./.agentrc/config.yaml` — project-local agent definitions and overrides.
+3. Check `./CLAUDE.md` — project-specific rules (Claude adapter).
 
 If none of these exist, you're in a plain directory. Universal skills are still available via `~/.agentrc/skills/`.
 
-## Agent roles
+## Agents
 
-Roles add domain-specific rules and project-specific context to a session. Role definitions live in `~/.agentrc/roles/`. Available roles are listed in `~/.agentrc/config.yaml`.
+Agents are named configurations that compose roles, skills, and project context. Agent definitions live in project-level `.agentrc/config.yaml` under the `agents:` key.
 
 ### Activation
 
-The user says "Boot <role>" to activate a role. The loading sequence:
+The user says "Boot <agent>" to activate a named agent. The loading sequence:
 
-1. Read `~/.agentrc/roles/<role>.md` — the global role definition.
-2. Check `./.agentrc/config.yaml` — if it maps a context file for this role, read `./.agentrc/<file>`.
-3. If no project config exists, the role still works — it just won't have project-specific context.
+1. Look up the agent slug in `./.agentrc/config.yaml` under `agents:`.
+2. For each role listed, resolve the file path from `~/.agentrc/config.yaml` role definitions and read from `~/.agentrc/roles/`.
+3. Load each listed skill from `~/.agentrc/skills/`.
+4. If a `context:` file is specified, read it from `./.agentrc/` (relative to the project).
+5. If no agent matches the slug, fall back to loading a single role by name from `~/.agentrc/roles/` (check domain/, stack/, meta/ subdirectories).
 
 ### Compaction recovery
 
-Role and project context files are small (~500-800 tokens). After context compaction, re-read both files to restore conventions. The instruction to do this lives in the never-compacted CLAUDE.md layer.
+Role and context files are small (~500-800 tokens). After context compaction, re-read all active role files and the context file to restore conventions. The instruction to do this lives in the never-compacted CLAUDE.md layer.
 
 ### Default behavior
 
-Without a "Boot <role>" instruction, the session runs as general-purpose with universal skills only. Projects can set a `default_role` in `.agentrc/config.yaml` — the agent should mention it's available but not load it automatically unless asked.
+Without a "Boot <agent>" instruction, the session runs as general-purpose with universal skills only. Projects can define agents but none activate automatically.

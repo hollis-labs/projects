@@ -1,6 +1,6 @@
 # Backlog Capture (:blg)
 
-Quick-capture a backlog item to Volon. Runs via sub-agent to keep main context clean.
+Quick-capture a backlog item to Engine. Runs via sub-agent to keep main context clean.
 
 ## When to use
 
@@ -31,10 +31,10 @@ You are a backlog capture agent for Fragments Engine. Create a well-structured b
    - Extract or infer a description/body with context on why this matters
    - Extract tags if mentioned, or infer from content (e.g., architecture, optimization, infrastructure, agent, gui, api)
    - Default priority: B (unless user specifies)
-   - Default project: volon (unless user specifies another project)
+   - Default project: engine (unless user specifies another project)
 
 2. Create the backlog item:
-   - Use mcp__volon__volon_backlog_capture with title, body, priority, project_id, tags
+   - Use mcp__engine__engine_backlog_capture with title, body, priority, project_id, tags
 
 3. Return ONLY this format:
    ✓ BLG-{id}: {title}
@@ -48,7 +48,7 @@ Display the sub-agent's confirmation. No additional commentary needed.
 ## Invariants
 
 - ALWAYS run via sub-agent
-- Default project: volon
+- Default project: engine
 - Default priority: B
 - Title should be actionable (imperative mood)
 - Body should include enough context for someone to understand the item later

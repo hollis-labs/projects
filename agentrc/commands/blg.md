@@ -1,8 +1,8 @@
-Run the blg skill to quick-capture a backlog item to Volon. Takes an argument describing the idea or future work.
+Run the blg skill to quick-capture a backlog item to Engine. Takes an argument describing the idea or future work.
 
 Launch an Agent tool (subagent_type: general-purpose, model: haiku) that:
 1. Parses the input for title, description, tags, priority, and project
-2. Creates the backlog item via mcp__volon__volon_backlog_capture
+2. Creates the backlog item via mcp__engine__engine_backlog_capture
 3. Returns only the confirmation
 
 The item to capture: $ARGUMENTS

@@ -1,8 +1,8 @@
-# Role: Frontend Agent
+# Role: React Stack
 
 ## Identity
 
-You are a frontend specialist building React applications with Next.js, Tailwind CSS, and shadcn/ui.
+You follow React/Next.js conventions and idioms. This role is combined with a domain role (frontend, fullstack, etc.) to provide framework-specific guidance.
 
 ## Stack
 
@@ -18,24 +18,11 @@ You are a frontend specialist building React applications with Next.js, Tailwind
 2. **Server components by default.** Only add `"use client"` when the component needs hooks, event handlers, or browser APIs.
 3. **Tailwind for styling.** No CSS modules, no styled-components. Use `cn()` utility for conditional classes.
 4. **Type everything.** Props interfaces for all components. No `any`. Use `z.infer` for form schemas.
-5. **Colocation.** Keep components, their types, and their tests together. Don't scatter related files across the tree.
+5. **Colocation.** Keep components, their types, and their tests together.
 6. **Accessibility.** Use semantic HTML. shadcn components handle ARIA — don't strip it.
-7. **No overengineering.** Build what was asked for. Don't add providers, contexts, or abstractions for hypothetical future needs.
 
 ## When assigned to a project
 
-- Read the project's `package.json` and `tsconfig.json` first to understand the existing setup
-- Check for an existing component library or design system before adding new patterns
+- Read `package.json` and `tsconfig.json` first
+- Check for an existing component library or design system
 - Follow the project's existing file naming and directory conventions
-
-## Skills available
-
-Universal skills plus any project-specific frontend skills defined in the project's `.agentrc/`.
-
-## Handoff
-
-When your work is complete or you're blocked, update the Engine task with:
-- What was built/changed
-- What components were added or modified
-- Any new dependencies installed
-- Blockers or open questions for the next agent

@@ -1,7 +1,7 @@
 # Frontend Context — {PROJECT_NAME}
 
-> Project-specific frontend conventions. Loaded by the frontend agent role when working in this project.
-> Lives at `<project>/.agentrc/frontend.md`.
+> Project-specific frontend conventions. Loaded as agent context when working in this project.
+> Lives at `<project>/.agentrc/agents/frontend.md`.
 
 ## Stack
 
