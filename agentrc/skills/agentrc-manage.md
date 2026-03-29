@@ -1,12 +1,13 @@
 # agentrc Manage (:agentrc-manage)
 
-Create roles, project context docs, and skills for the agentrc system. Runs via sub-agent.
+Create roles, project context docs, skills, and agent definitions for the agentrc system. Runs via sub-agent.
 
 ## When to use
 
 - `/agentrc-manage role <name> <description>` — Create a new agent role
 - `/agentrc-manage context <project> <domain>` — Audit a project and generate a context doc
 - `/agentrc-manage skill <name> <description>` — Create a new skill
+- `/agentrc-manage agent <slug> <project> [options]` — Create an agent definition with config entry and context doc
 
 ## IMPORTANT: Run in Sub-Agent
 
@@ -229,9 +230,101 @@ You are building a new skill for the agentrc system.
 7. Return ONLY: ✓ Created skill: {path} — {one-line summary}
 ```
 
+## Mode 4: Create Agent Definition
+
+```
+/agentrc-manage agent <slug> <project> [--roles role1,role2] [--skills skill1,skill2] [--context filename.md] [--description "one-liner"]
+```
+
+**Examples:**
+- `/agentrc-manage agent conduit-plugin-dev conduit --roles backend,go --skills go-build,go-lint,go-test,doc-note,doc-search --context agents/plugin-dev.md --description "Develop and maintain Conduit plugins"`
+- `/agentrc-manage agent engine-backend engine --roles backend,go --skills go-build,go-lint,go-test`
+- `/agentrc-manage agent nanite-frontend nanite --roles frontend,react --context agents/frontend.md`
+
+**Procedure:** Launch a sub-agent with:
+
+```
+You are creating a new agent definition for the agentrc system. An agent combines roles, skills, and project-specific context into a named profile that can be activated with "Boot <slug>".
+
+## Agent to create
+- Slug: {SLUG}
+- Project: {PROJECT}
+- Name: {NAME} (derive from slug if not provided — title case, e.g., "conduit-plugin-dev" → "Conduit Plugin Developer")
+- Description: {DESCRIPTION} (ask user if not provided)
+- Roles: {ROLES} (default: [backend, go] — ask user if unclear)
+- Skills: {SKILLS} (default: [] — ask user if task-specific skills are needed)
+- Context file: {CONTEXT} (default: agents/{SLUG}.md — the path relative to .agentrc/)
+
+## Steps
+
+1. Resolve the project root from ~/.agentrc/config.yaml `projects:` section.
+   - If not found, ask the user for the path. Do not guess.
+
+2. Read the project's .agentrc/config.yaml to check for:
+   - Existing agents (avoid slug collisions)
+   - The agentrc_version in use
+
+3. Read 2-3 existing agent context docs for reference on structure and quality:
+   - Check the target project's .agentrc/agents/ for existing docs
+   - If none exist, read from another project (e.g., cerberus, hadron, or conduit)
+
+4. Add the agent entry to {PROJECT_ROOT}/.agentrc/config.yaml under `agents:`:
+
+   ```yaml
+     {SLUG}:
+       name: {NAME}
+       description: {DESCRIPTION}
+       roles: [{ROLES}]
+       skills: [{SKILLS}]
+       context: {CONTEXT}
+   ```
+
+   - Append after existing agents. Maintain YAML formatting.
+   - If no `agents:` key exists, create it after `agentrc_version:`.
+
+5. Create the context doc directory if needed:
+   mkdir -p {PROJECT_ROOT}/.agentrc/agents
+
+6. Create the context doc at {PROJECT_ROOT}/.agentrc/{CONTEXT}:
+
+   ```markdown
+   # Agent Context: {NAME}
+
+   ## Purpose
+   {One paragraph: what this agent does and when to use it.}
+
+   ## Key Paths
+   | Path | Purpose |
+   |------|---------|
+   {Table of important files/directories this agent works with.
+    Include paths provided by the user. If none provided, populate
+    from project structure — read the project root to identify key dirs.}
+
+   ## Conventions
+   {Project-specific rules this agent should follow.
+    Read existing code to identify patterns — don't generate generic content.}
+   ```
+
+   - If the user provided specific paths or context, incorporate them.
+   - If the user described tasks, add a "## Scope" section summarizing what this agent covers.
+   - Keep it focused. Don't repeat what roles already cover.
+   - Every statement should reference a real file or directory.
+
+7. Verify:
+   - The YAML is valid (no duplicate keys, correct indentation)
+   - The context file path in the config matches the actual file created
+   - The roles listed exist in ~/.agentrc/config.yaml `roles:` section
+
+8. Return ONLY:
+   ✓ Created agent: {SLUG} in {PROJECT}
+   — Config: {PROJECT_ROOT}/.agentrc/config.yaml
+   — Context: {PROJECT_ROOT}/.agentrc/{CONTEXT}
+   — Roles: {ROLES} | Skills: {SKILLS}
+```
+
 ## Invariants
 
-- ALWAYS run via sub-agent for all three modes.
+- ALWAYS run via sub-agent for all four modes.
 - ALWAYS read existing examples before generating. Match the conventions.
 - If the project is not found in ~/.agentrc/config.yaml projects section (for context mode), ask the user for the path. Do not guess.
 - Generated files must be complete and usable — no TODO placeholders, no "fill this in later."

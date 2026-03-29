@@ -126,7 +126,8 @@ Install or uninstall the agentrc framework in a project directory. Creates the `
    If `.claude/` already exists:
    - If `skills/` and `commands/` are directory symlinks pointing to `.agentrc/`, leave them.
    - If they are directory symlinks pointing directly to `~/.agentrc/` (bypassing `.agentrc/`), re-point them to `../.agentrc/skills` and `../.agentrc/commands`. Report: "Fixed adapter to route through .agentrc/."
-   - If they contain individual file symlinks (old model), remove and replace with directory symlinks to `.agentrc/`. Report: "Migrated Claude adapter from per-file to directory symlinks."
+   - If `skills/` is a **real directory containing per-file symlinks plus vendor skill symlinks** (e.g., `shadcn-ui → ~/.agentrc/vendor/shadcn-ui`), **leave it intact**. This is the vendor skill pattern — the project opted into per-file symlinks to scope vendor skills. Report: "Detected vendor skill setup — preserving per-file symlinks."
+   - If `skills/` contains only per-file symlinks to `~/.agentrc/skills/` (no vendor additions), it can be consolidated to a directory symlink. Report: "Migrated Claude adapter from per-file to directory symlinks."
    - Leave any other `.claude/` content (hooks, memory, settings) untouched.
 
    If `CLAUDE.md` exists, only append the `## agentrc` block if not already present.

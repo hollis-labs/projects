@@ -145,7 +145,7 @@ Everything an agent outputs consumes context window tokens. Design skills to pro
 
 ### Current skills
 
-18 skills total: 17 `.md` files + 1 `nanite/` directory.
+19 shared skills (in `~/.agentrc/skills/`) + 1 vendor skill (in `~/.agentrc/vendor/`).
 
 | Skill | Purpose | Mode |
 |-------|---------|------|
@@ -165,12 +165,25 @@ Everything an agent outputs consumes context window tokens. Design skills to pro
 | go-lint | Lint Go project | inline |
 | go-test | Run Go tests | inline |
 | agentrc-install | Install/uninstall agentrc | inline |
-| agentrc-manage | Create roles, context, skills | sub-agent |
+| agentrc-manage | Create roles, context, skills, agent definitions | sub-agent |
+| shadcn-install | Add shadcn MCP + skill to a project | inline |
 | nanite/ | Nanite knowledge vault skills | inline |
+
+### Vendor skills
+
+Vendor skills are third-party skill packages stored in `~/.agentrc/vendor/` (not `~/.agentrc/skills/`). This prevents them from auto-loading in all projects via the shared directory symlink.
+
+| Vendor skill | Source | Purpose |
+|-------------|--------|---------|
+| shadcn-ui | `pnpm dlx skills add shadcn/ui` | shadcn component search, install, docs, coding conventions |
+
+**Scoping:** Vendor skills are symlinked into specific projects' `.claude/skills/` directories. Projects that opt into vendor skills use per-file symlinks instead of a directory symlink for `.claude/skills/`. Use `/shadcn-install` to add shadcn to a project.
+
+**Upgrading:** Re-run the skills installer to a temp directory, copy output to `~/.agentrc/vendor/<skill>/`. Existing symlinks propagate automatically.
 
 ### Current commands
 
-18 command stubs in `~/.agentrc/commands/`. Each is a slash-command entry point that delegates to its matching skill.
+19 command stubs in `~/.agentrc/commands/`. Each is a slash-command entry point that delegates to its matching skill.
 
 | Command | Delegates to | Notes |
 |---------|-------------|-------|
@@ -191,6 +204,7 @@ Everything an agent outputs consumes context window tokens. Design skills to pro
 | /go-test | go-test | |
 | /agentrc-install | agentrc-install | |
 | /agentrc-manage | agentrc-manage | |
+| /shadcn-install | shadcn-install | Add shadcn to a frontend project |
 | /boot-prompt | boot-prompt | |
 
 ## Hook Design Rules
