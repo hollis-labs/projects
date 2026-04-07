@@ -6,7 +6,7 @@ Quick-capture a backlog item to Engine. Runs via sub-agent to keep main context 
 
 - When the user types `:blg` or `/blg` with an idea or future work item
 - When something comes up in conversation that should be tracked but isn't urgent
-- Example: `/blg Investigate PostgreSQL migration path for Cortex`
+- Example: `/blg Investigate PostgreSQL migration path for Vanta Conduit`
 
 ## IMPORTANT: Run in Sub-Agent
 

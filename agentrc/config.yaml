@@ -84,16 +84,16 @@ projects:
     type: monorepo
     description: Core platform monorepo
     modules:
-      engine:  { path: engine, lang: go }
-      conduit: { path: conduit, lang: go }
-      cortex:  { path: cortex, lang: go }
-      libs:    { path: libs, lang: go }
+      engine:        { path: engine, lang: go }
+      conduit:       { path: conduit, lang: go }
+      vanta-conduit: { path: cortex, lang: go }
+      libs:          { path: libs, lang: go }
 
   # Monorepo modules (individual project entries for install/update tracking)
-  engine:    { root: ~/Projects-apps/fragments-engine/engine, lang: go, description: "Fragments Engine Core — task/sprint/project management, Nexus agent routing" }
-  conduit:   { root: ~/Projects-apps/fragments-engine/conduit, lang: go, description: Chat interface and conversation management }
-  cortex:    { root: ~/Projects-apps/fragments-engine/cortex, lang: go, description: Context memory, RAG, and document storage }
-  libs:      { root: ~/Projects-apps/fragments-engine/libs, lang: go, description: Shared libraries — MCP, OTel, plugin, toolbroker }
+  engine:         { root: ~/Projects-apps/fragments-engine/engine, lang: go, description: "Fragments Engine Core — task/sprint/project management, Nexus agent routing" }
+  conduit:        { root: ~/Projects-apps/fragments-engine/conduit, lang: go, description: Chat interface and conversation management }
+  vanta-conduit:  { root: ~/Projects-apps/fragments-engine/cortex, lang: go, description: "Vanta Conduit — context memory, RAG, and document storage" }
+  libs:           { root: ~/Projects-apps/fragments-engine/libs, lang: go, description: Shared libraries — MCP, OTel, plugin, toolbroker }
 
   # Services
   hadron:    { root: ~/Projects-apps/hadron, lang: go, description: Blueprint automation engine }

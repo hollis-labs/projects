@@ -1,4 +1,4 @@
-Search project documentation in Cortex. Takes arguments: [query] [--project X] [--type Y] [--status Z] [--limit N].
+Search project documentation in Vanta Conduit. Takes arguments: [query] [--project X] [--type Y] [--status Z] [--limit N].
 
 Parse $ARGUMENTS for:
 - query text (anything not prefixed with --)

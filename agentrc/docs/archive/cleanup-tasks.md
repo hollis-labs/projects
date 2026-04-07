@@ -126,7 +126,7 @@ No action needed.
 |------|--------|
 | `.agentrc/bootstrap.md` (17.5K) | DELETE — replaced by boot-prompt skill |
 | `.agentrc/boot/` (7 profiles) | KEEP meta-agent and worker. DROP prime, architect, analyst, reviewer, ops-tester (Multiplexor roles). |
-| `.agentrc/pcc/` (global + tasks) | FREEZE — don't delete yet, but stop generating. Evaluate if Cortex replaces this. |
+| `.agentrc/pcc/` (global + tasks) | FREEZE — don't delete yet, but stop generating. Evaluate if Vanta Conduit replaces this. |
 | `.agentrc/inbox/` | DELETE — Multiplexor A2A messaging, handled by Engine |
 | `.agentrc/plans/` | KEEP — phase files still useful for reference |
 | `.agentrc/agent-boot.md` | REWRITE to match new minimal boot contract |
@@ -136,13 +136,13 @@ No action needed.
 | Hook scripts (audit, worktree-check, session-end) | DELETE from .claude/hooks/ |
 | settings.json hooks | UPDATE to remove dropped hooks |
 
-## 6. Cortex tasks
+## 6. Vanta Conduit tasks
 
 | Task | Priority |
 |------|----------|
 | Verify/add firstOrCreate for namespaces | HIGH — doc-note depends on this |
 | Register docs namespaces for known projects | After firstOrCreate works |
-| Audit current Cortex data and schema | Review what agents stored vs what we want |
+| Audit current Vanta Conduit data and schema | Review what agents stored vs what we want |
 | Test doc-note → doc-search round-trip | Validate the new skills work end-to-end |
 
 ## 7. Follow-up sessions

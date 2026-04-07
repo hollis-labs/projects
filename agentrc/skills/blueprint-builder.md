@@ -14,7 +14,7 @@ This skill does significant work (blueprint generation, validation, registration
 
 ## Examples
 - `/blueprint-builder run-integration-tests — Run go test with race detection on all packages in a project, outputting a JUnit XML report`
-- `/blueprint-builder sync-cortex-backup — Export all Cortex namespaces to a timestamped JSON file in ~/.cortex/backups/`
+- `/blueprint-builder sync-conduit-backup — Export all Vanta Conduit namespaces to a timestamped JSON file in ~/.conduit/backups/`
 
 ## Instructions
 

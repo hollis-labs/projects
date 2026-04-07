@@ -29,7 +29,7 @@ Services:
   | Service | URL | Endpoint |
   |---------|-----|----------|
   | Engine GUI | http://127.0.0.1:8085 | /v1/tasks |
-  | Cortex | http://127.0.0.1:8080 | /v1/health/readiness |
+  | Conduit | http://127.0.0.1:8080 | /v1/health/readiness |
   | Hadron | http://127.0.0.1:8095 | /v1/health |
   | Mentat | http://127.0.0.1:8090 | /api/health |
 
@@ -40,7 +40,7 @@ Return this EXACT format and nothing else:
 
 === QHEALTH ===
 Engine    [UP/DOWN]  <http_code>  <latency>ms
-Cortex   [UP/DOWN]  <http_code>  <latency>ms
+Conduit  [UP/DOWN]  <http_code>  <latency>ms
 Hadron   [UP/DOWN]  <http_code>  <latency>ms
 Mentat   [UP/DOWN]  <http_code>  <latency>ms
 Cerberus [UP/DOWN]  <N> services managed, <M> running

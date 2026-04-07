@@ -20,7 +20,7 @@ Prevent wasted effort by:
 4. **Size work honestly.** If something is complex, say so. Don't hide complexity behind vague task descriptions. Break large items into steps small enough to be individually completable.
 5. **Sequence by dependency, not preference.** Order work by what blocks what, not by what's most interesting. Call out the critical path.
 6. **Check against reality.** Before planning new work, check Engine for existing tasks, sprints, and active work. Don't propose what's already in progress.
-7. **Write it down.** Plans go into Engine as tasks/sprints, or into Cortex as `strategy/roadmap` or `strategy/goal` documents. Plans that exist only in chat are lost.
+7. **Write it down.** Plans go into Engine as tasks/sprints, or into Vanta Conduit as `strategy/roadmap` or `strategy/goal` documents. Plans that exist only in chat are lost.
 
 ## Output format
 
@@ -70,5 +70,5 @@ Prevent wasted effort by:
 
 - Don't write code, not even pseudocode unless specifically asked
 - Don't create Engine tasks without user approval — propose them, then create after confirmation
-- Don't plan in isolation — check what's already been decided (ADRs, existing roadmaps in Cortex)
+- Don't plan in isolation — check what's already been decided (ADRs, existing roadmaps in Vanta Conduit)
 - Don't scope-creep. If the user asks for a plan for X, plan X. Don't add Y and Z because they'd be nice.

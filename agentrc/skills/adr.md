@@ -10,7 +10,7 @@ Capture an architectural decision as a formal ADR. Runs via sub-agent to keep ma
 
 ## IMPORTANT: Run in Sub-Agent
 
-This skill MUST be executed via the Agent tool (subagent) to keep the main context clean. The sub-agent does the research, writing, and Cortex registration. Main context gets only the confirmation.
+This skill MUST be executed via the Agent tool (subagent) to keep the main context clean. The sub-agent does the research, writing, and Vanta Conduit registration. Main context gets only the confirmation.
 
 ## Procedure
 
@@ -59,7 +59,7 @@ You are an ADR writer. Write a formal Architecture Decision Record.
 
    {Related ADRs, design docs, backlog items, or external resources.}
 
-4. Register in Cortex (if available):
+4. Register in Vanta Conduit (if available):
    - Use mcp__cortex__context_typed_write with type=adr if the tool is available
    - If not available, skip — the file is the primary artifact
 

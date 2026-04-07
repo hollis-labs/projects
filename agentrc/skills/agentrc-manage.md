@@ -102,7 +102,7 @@ You are building a new agent role definition for the agentrc system.
 
 **Examples:**
 - `/agentrc-manage context hadron frontend` — Audit Hadron's frontend and generate style guide
-- `/agentrc-manage context cortex backend` — Audit Cortex's Go backend and generate conventions doc
+- `/agentrc-manage context vanta-conduit backend` — Audit Vanta Conduit's Go backend and generate conventions doc
 - `/agentrc-manage context cerberus infra` — Audit Cerberus's infrastructure setup
 
 **Procedure:** Launch a sub-agent with:

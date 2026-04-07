@@ -1,6 +1,6 @@
 # Doc Note (:doc-note)
 
-Store a documentation note in Cortex. Runs via sub-agent to keep main context clean.
+Store a documentation note in Vanta Conduit. Runs via sub-agent to keep main context clean.
 
 ## When to use
 
@@ -11,7 +11,7 @@ Store a documentation note in Cortex. Runs via sub-agent to keep main context cl
 
 ## IMPORTANT: Run in Sub-Agent
 
-This skill MUST be executed via the Agent tool (subagent) to keep the main context clean. The sub-agent validates, maps, writes to Cortex, and returns a one-line confirmation.
+This skill MUST be executed via the Agent tool (subagent) to keep the main context clean. The sub-agent validates, maps, writes to Vanta Conduit, and returns a one-line confirmation.
 
 ## Input Format
 
@@ -22,7 +22,7 @@ This skill MUST be executed via the Agent tool (subagent) to keep the main conte
 **project** — Target project namespace. Must be one of the known projects or `_shared` for cross-project docs.
 
 **type** — Document type. One of:
-| Input       | Cortex Type           | Use for                              |
+| Input       | Conduit Type          | Use for                              |
 |-------------|-----------------------|--------------------------------------|
 | architecture | system/map           | Structure, topology, how things connect |
 | decision    | decision/adr          | Choices made and why                  |
@@ -38,7 +38,7 @@ This skill MUST be executed via the Agent tool (subagent) to keep the main conte
 
 ## Known Projects
 
-engine, conduit, cortex, hadron, nexus, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
+engine, conduit, vanta-conduit, hadron, nexus, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
 
 ## Procedure
 
@@ -47,18 +47,18 @@ Parse the user's input for project, type, and content. If any field is missing o
 Launch an Agent with this prompt (fill in from parsed input):
 
 ```
-You are a documentation clerk for Fragments Engine. Your only job is to store a note in Cortex.
+You are a documentation clerk for Fragments Engine. Your only job is to store a note in Vanta Conduit.
 
 ## Input:
 - Project: {PROJECT}
-- Type: {TYPE} (maps to Cortex type: {CORTEX_TYPE})
+- Type: {TYPE} (maps to Conduit type: {CONDUIT_TYPE})
 - Content: {CONTENT}
 
 ## Steps:
 
 1. Validate the input:
-   - Project must be one of: engine, conduit, cortex, hadron, nexus, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
-   - Type must map to a known Cortex type (see table above)
+   - Project must be one of: engine, conduit, vanta-conduit, hadron, nexus, cerberus, carrier, nanite, sigil, suds-v2, lnklst, _shared
+   - Type must map to a known Conduit type (see table above)
    - Content must be non-empty
    - If any validation fails, return: ✗ Missing or invalid: {field}. Provide {what's needed}.
 
@@ -66,17 +66,17 @@ You are a documentation clerk for Fragments Engine. Your only job is to store a 
    - Format: {timestamp}-{4-char-random}
    - Example: 20260321-143022-a7f2
 
-3. Write to Cortex:
+3. Write to Vanta Conduit:
    - Use mcp__cortex__context_typed_write with:
      - namespace: {PROJECT}/docs
      - key: {generated-key}
-     - record_type: {CORTEX_TYPE}
+     - record_type: {CONDUIT_TYPE}
      - status: draft
      - payload: the content text
      - actor: doc-note
 
 4. Return ONLY this format:
-   ✓ Stored to {PROJECT}/docs/{key} as {CORTEX_TYPE} (draft)
+   ✓ Stored to {PROJECT}/docs/{key} as {CONDUIT_TYPE} (draft)
 ```
 
 ## Output

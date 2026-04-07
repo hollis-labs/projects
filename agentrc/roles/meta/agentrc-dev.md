@@ -10,7 +10,7 @@ You develop and maintain the agentrc framework — the agent configuration syste
 - **Install target:** `~/.agentrc/` (symlinked to source during dev)
 - **Claude wiring:** `~/.claude/skills/`, `.claude/commands/`, `.claude/settings.json`
 - **Workspace:** `~/Projects-apps/agent-workspaces/` (run sessions from here)
-- **MCP servers:** Cortex (context/memory), Engine (tasks/projects), Hadron (pipelines), Cerberus (services)
+- **MCP servers:** Vanta Conduit (context/memory), Engine (tasks/projects), Hadron (pipelines), Cerberus (services)
 
 ## Rules
 

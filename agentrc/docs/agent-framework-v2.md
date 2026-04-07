@@ -9,7 +9,7 @@ Reference document for the agentrc agent framework. This document should always 
 3. **Focused agents > general agents.** Load context for the task, not the universe.
 4. **Skills for knowledge, hooks for enforcement.** Skills load on demand. Hooks run silently unless they block.
 5. **Sub-agent output isolation.** Heavy work runs in sub-agents. Main context gets one-line confirmations.
-6. **Progressive context disclosure.** Boot gives identity + task. Skills give procedure. Cortex gives memory.
+6. **Progressive context disclosure.** Boot gives identity + task. Skills give procedure. Vanta Conduit gives memory.
 
 ## Agent Model
 
@@ -151,8 +151,8 @@ Everything an agent outputs consumes context window tokens. Design skills to pro
 |-------|---------|------|
 | adr | Architectural decision capture | sub-agent |
 | blg | Quick backlog capture | sub-agent |
-| doc-note | Store docs in Cortex | sub-agent |
-| doc-search | Query docs from Cortex | inline |
+| doc-note | Store docs in Vanta Conduit | sub-agent |
+| doc-search | Query docs from Vanta Conduit | inline |
 | boot-prompt | Session handoff document | manual |
 | qstatus | Compact status snapshot | sub-agent |
 | qhealth | Service health check | sub-agent |
@@ -215,7 +215,7 @@ Good: envelope-guard blocks a write and explains why. Bad: audit hook logs every
 ### Hooks for enforcement, not capture
 Use hooks to prevent bad actions. Don't use hooks for logging or context injection.
 
-## Namespace Convention (Cortex)
+## Namespace Convention (Vanta Conduit)
 
 ```
 {project}/
@@ -273,10 +273,10 @@ The global config lists both monorepos and individual modules as first-class pro
 | fragments-engine | Monorepo root |
 | engine | Fragments Engine Core (task/sprint/project management, Nexus agent routing) |
 | conduit | Chat interface and conversation management |
-| cortex | Context memory, RAG, and document storage |
+| vanta-conduit | Vanta Conduit — context memory, RAG, and document storage |
 | libs | Shared libraries (MCP, OTel, plugin, toolbroker) |
 
-`engine`, `conduit`, `cortex`, and `libs` are modules within the `fragments-engine` monorepo, listed individually so agents can scope to a single module.
+`engine`, `conduit`, `vanta-conduit`, and `libs` are modules within the `fragments-engine` monorepo, listed individually so agents can scope to a single module.
 
 Project-level config at `<project>/.agentrc/config.yaml`:
 

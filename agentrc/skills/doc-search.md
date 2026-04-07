@@ -1,6 +1,6 @@
 # Doc Search (:doc-search)
 
-Search project documentation stored in Cortex. Returns results without interpretation.
+Search project documentation stored in Vanta Conduit. Returns results without interpretation.
 
 ## When to use
 
@@ -18,7 +18,7 @@ Search project documentation stored in Cortex. Returns results without interpret
 
 **query** — Natural language question or keywords. Triggers semantic search via embeddings.
 
-**--project** — Scope to a single project namespace (e.g., `engine`, `cortex`). Optional.
+**--project** — Scope to a single project namespace (e.g., `engine`, `vanta-conduit`). Optional.
 
 **--type** — Filter by document type: architecture, decision, api, data, procedure, constraint, goal, note, summary. Optional.
 
@@ -41,7 +41,7 @@ Use `mcp__cortex__context_rag_query` with:
 
 Use `mcp__cortex__context_typed_view` with:
 - namespaces: `{project}/docs` if --project given, otherwise `*/docs`
-- types: mapped from --type to Cortex type (same mapping as doc-note)
+- types: mapped from --type to Conduit type (same mapping as doc-note)
 - status: from --status if given
 - limit: from --limit or default 5
 
@@ -63,7 +63,7 @@ Display the formatted results list. No interpretation, no summary, no recommenda
 ## Invariants
 
 - This skill reads only. It never writes, updates, or deletes.
-- Results are returned as-is from Cortex. No filtering by the skill beyond what was requested.
+- Results are returned as-is from Vanta Conduit. No filtering by the skill beyond what was requested.
 - If `context_rag_query` returns an error or empty results, fall back to `context_search` with keyword matching and note: "Semantic search unavailable, using keyword fallback."
 - If zero results after fallback, say: "No documents found matching query."
 - Default excludes deprecated records unless --status explicitly includes them.
