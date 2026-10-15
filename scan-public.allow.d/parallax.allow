@@ -1,0 +1,39 @@
+# parallax: findings reviewed by the owner 2026-10-15 (path, host and home-directory references only).
+agent-box-host parallax/docs/tether-sysop-fixtures.md Internal build machine name used as a label or example; reviewed by the owner 2026-10-15, not an access path.
+agent-box-host parallax/frontend/src/fixtures/tether-sysop.json Internal build machine name used as a label or example; reviewed by the owner 2026-10-15, not an access path.
+agent-box-host parallax/internal/scenarios/tether_sysop.go Internal build machine name used as a label or example; reviewed by the owner 2026-10-15, not an access path.
+home-path-linux parallax/docs/flux-chat-replay.py Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/flux-drawers-proposal.md Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/flux-fidelity/capture-evidence.md Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/flux-fidelity/proof-manifest.json Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/flux-fidelity/replay/capture-banner.cjs Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/flux-fidelity/replay/capture-full-observed.cjs Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/flux-fidelity/replay/capture.cjs Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/flux-fidelity/replay/fonts.conf Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/nil-example-replay.md Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/nil-radial-candidate.json Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/reader-detail-replay.py Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/tachyon-nav-replay.py Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/tether-ai-dec073.md Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/tether-ai-replay.py Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/tether-overview-dec073.md Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/docs/tether-sysop-fixtures.md Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/frontend/playwright.config.ts Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/frontend/src/fixtures/tether-sysop.json Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/frontend/src/tether-sysop/AIGatewayPage.tsx Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/frontend/tests/tether-ai.spec.ts Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/frontend/tests/tether-overview.spec.ts Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+home-path-linux parallax/internal/scenarios/tether_sysop.go Developer home directory path in a test, doc or local config; reviewed by the owner 2026-10-15, no credential.
+internal-ip parallax/docs/review-workbench.md Private-range sample address in a test or doc; reviewed by the owner 2026-10-15.
+internal-ip parallax/frontend/src/workbench/catalog.ts Private-range sample address in a test or doc; reviewed by the owner 2026-10-15.
+internal-ip parallax/frontend/tests/workbench.spec.ts Private-range sample address in a test or doc; reviewed by the owner 2026-10-15.
+nanite-cloud-host parallax/docs/flux-fidelity-spec.md Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+nanite-cloud-host parallax/docs/review-workbench.md Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+nanite-cloud-host parallax/frontend/src/fixtures/reader-example.json Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+nanite-cloud-host parallax/frontend/src/fixtures/tether-sysop.json Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+nanite-cloud-host parallax/frontend/src/workbench/catalog.ts Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+nanite-cloud-host parallax/frontend/tests/workbench.spec.ts Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+nanite-cloud-host parallax/internal/scenarios/reader.go Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+nanite-cloud-host parallax/internal/scenarios/tether_sysop.go Service hostname used as a fixture, catalog entry or test value in a frontend; the owner judged it useless to third parties and approved allowlisting on 2026-10-15.
+secret-assignment parallax/docs/flux-fidelity/source-token-inventory.json Test, fixture, documentation sample or design-token name; a high-entropy literal check found no live credential; reviewed by the owner 2026-10-15.
+secret-assignment parallax/frontend/src/examples/flux-cards/StreamStates.tsx Test, fixture, documentation sample or design-token name; a high-entropy literal check found no live credential; reviewed by the owner 2026-10-15.
