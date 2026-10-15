@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Repository layout guard (projects). Exits non-zero when:
+#   - the tree breaks the flat layout: a loose file at the root (every project is a top-level
+#     directory), a submodule, an LFS filter, a file over 10 MiB, a directory name that is not
+#     lower case [a-z0-9._-];
+#   - a go.work or go.work.sum is tracked or sits in the tree and is not ignored (anywhere);
+#   - a scan-public allowlist line has no reason, or a reason that quotes an address or value.
+# Projects are plain directories: no module or tag machinery, so a project's own go.mod is
+# its own business and is not checked.
+#
+# Usage: scripts/check-layout
+set -euo pipefail
+# shellcheck source-path=SCRIPTDIR
+# shellcheck source=_common.sh
+. "$(cd "$(dirname "$0")" && pwd)/_common.sh"
+# shellcheck source-path=SCRIPTDIR
+# shellcheck source=check-common.sh
+. "$SCRIPT_DIR/check-common.sh"
+
+fail=0
+bad() {
+  echo "FAIL: $*" >&2
+  fail=1
+}
+
+check_common
+
+while IFS= read -r f; do
+  [ -n "$f" ] || continue
+  [ -e "$REPO_ROOT/$f" ] || continue
+  case "$(basename "$f")" in
+    go.work | go.work.sum) bad "$f: go.work is not allowed in this repository" ;;
+  esac
+done <<EOF2
+$(repo_files)
+EOF2
+
+[ "$fail" -eq 0 ] || exit 1
+echo "ok: layout (flat; $(project_dirs | wc -l | tr -d ' ') projects: $(project_dirs | tr '\n' ' '))"
