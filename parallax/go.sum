@@ -1,0 +1,8 @@
+github.com/brianvoe/gofakeit/v7 v7.17.1 h1:50FLBhTGVJQaj6ysRUu0it8wCdYO2uGM9VfuxI+csEc=
+github.com/brianvoe/gofakeit/v7 v7.17.1/go.mod h1:QXuPeBw164PJCzCUZVmgpgHJ3Llj49jSLVkKPMtxtxA=
+github.com/hollis-labs/chimera v0.1.0 h1:n0rx9Aevgaogb8lLOibCHrfxuaxm5GI8ZU64bSWDjJI=
+github.com/hollis-labs/chimera v0.1.0/go.mod h1:yWMkVF+i1Y1Hr8ni0WhE70LwvYUBDv1LAQZN6ThSoGA=
+github.com/hollis-labs/libs/plugin-mcp v0.1.1 h1:213HZTZaWL6KFkQeU3d2HZU9UMI+C0jxixHUtD4JFR0=
+github.com/hollis-labs/libs/plugin-mcp v0.1.1/go.mod h1:3x5ZVgHJewzwEpdl1RNFfxXXkq9SKVNL6LJVcpLCGnQ=
+github.com/hollis-labs/libs/ui-go v0.1.0 h1:vR7BvLAagpopIB/+QA7JjLPmOuX0QSOyJp/uisV0Mhg=
+github.com/hollis-labs/libs/ui-go v0.1.0/go.mod h1:bDgeIvyrJqQNOEnmvNH2Xw2HxLyB3y6xoqgTZxMf7y4=

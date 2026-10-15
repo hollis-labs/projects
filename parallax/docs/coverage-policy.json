@@ -1,0 +1,1534 @@
+{
+  "version": 1,
+  "meaning": "Reviewed = bounded named behavior evidence; partial = import plus family evidence only; deferred = actionable not adopted; unsupported = specific API/policy gap. Types/utilities use nonvisual review, not hollow stories.",
+  "families": [
+    {
+      "package": "@hollis-labs/design-components",
+      "evidence": {
+        "pages": [
+          "frontend/src/App.tsx",
+          "frontend/src/examples/nil/NilExample.tsx",
+          "frontend/src/examples/flux-chat/FluxChat.tsx",
+          "frontend/src/examples/flux-chat/Conversation.tsx",
+          "docs/flux-chat-composition.md",
+          "frontend/src/examples/tachyon-nav/TachyonNav.tsx",
+          "docs/tachyon-nav-example.md"
+        ],
+        "checks": [
+          "frontend/tests/lab.spec.ts",
+          "frontend/tests/nil-example.spec.ts",
+          "frontend/tests/flux-chat.spec.ts",
+          "frontend/tests/flux-chat-custody.spec.ts",
+          "frontend/tests/tachyon-nav.spec.ts",
+          "frontend/tests/tachyon-nav-custody.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/operations/Operations.stories.tsx",
+          "frontend/src/examples/nil/Nil.stories.tsx",
+          "frontend/src/examples/flux-chat/FluxChat.stories.tsx",
+          "frontend/src/examples/tachyon-nav/TachyonNav.stories.tsx"
+        ],
+        "storyIds": [
+          "operations-controlled-views--primitives",
+          "app-examples-nil--operations",
+          "examples-flux-chat--default",
+          "examples-flux-chat--workspace",
+          "examples-flux-chat--focus",
+          "examples-flux-chat--reading",
+          "examples-flux-chat--welcome",
+          "examples-flux-chat--loading",
+          "examples-flux-chat--empty",
+          "examples-flux-chat--unavailable",
+          "examples-flux-chat--denied",
+          "examples-flux-chat--locked",
+          "examples-flux-chat--partial",
+          "examples-tachyon-navigation--grouped",
+          "examples-tachyon-navigation--left-sub-rail",
+          "examples-tachyon-navigation--hidden-routes",
+          "examples-tachyon-navigation--orphaned",
+          "examples-tachyon-navigation--retired",
+          "examples-tachyon-navigation--empty",
+          "examples-tachyon-navigation--denied",
+          "examples-tachyon-navigation--unavailable",
+          "examples-tachyon-navigation--degraded"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "evidence": {
+        "pages": [
+          "frontend/src/operations/Views.tsx",
+          "frontend/src/examples/nil/NilExample.tsx",
+          "frontend/src/examples/tachyon-nav/TachyonNav.tsx",
+          "docs/tachyon-nav-example.md"
+        ],
+        "checks": [
+          "frontend/tests/lab.spec.ts",
+          "frontend/tests/nil-example.spec.ts",
+          "frontend/tests/tachyon-nav.spec.ts",
+          "frontend/tests/tachyon-nav-custody.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/operations/Operations.stories.tsx",
+          "frontend/src/examples/nil/Nil.stories.tsx",
+          "frontend/src/examples/tachyon-nav/TachyonNav.stories.tsx"
+        ],
+        "storyIds": [
+          "operations-controlled-views--mission-control",
+          "app-examples-nil--operations",
+          "examples-tachyon-navigation--grouped",
+          "examples-tachyon-navigation--left-sub-rail",
+          "examples-tachyon-navigation--hidden-routes",
+          "examples-tachyon-navigation--orphaned",
+          "examples-tachyon-navigation--retired",
+          "examples-tachyon-navigation--empty",
+          "examples-tachyon-navigation--denied",
+          "examples-tachyon-navigation--unavailable",
+          "examples-tachyon-navigation--degraded"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-chat",
+      "evidence": {
+        "pages": [
+          "frontend/src/communications/Chat.tsx",
+          "frontend/src/examples/flux-chat/FluxChat.tsx",
+          "frontend/src/examples/flux-chat/Conversation.tsx",
+          "docs/flux-chat-composition.md"
+        ],
+        "checks": [
+          "frontend/tests/communications.spec.ts",
+          "frontend/tests/flux-chat.spec.ts",
+          "frontend/tests/flux-chat-custody.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/communications/Communications.stories.tsx",
+          "frontend/src/examples/flux-chat/FluxChat.stories.tsx"
+        ],
+        "storyIds": [
+          "examples-flux-chat--default",
+          "examples-flux-chat--workspace",
+          "examples-flux-chat--focus",
+          "examples-flux-chat--reading",
+          "examples-flux-chat--welcome",
+          "examples-flux-chat--loading",
+          "examples-flux-chat--empty",
+          "examples-flux-chat--unavailable",
+          "examples-flux-chat--denied",
+          "examples-flux-chat--locked",
+          "examples-flux-chat--partial"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-bindings",
+      "evidence": {
+        "pages": [
+          "frontend/src/communications/model.ts"
+        ],
+        "checks": [
+          "frontend/tests/communications.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-admin",
+      "evidence": {
+        "pages": [
+          "frontend/src/administration/Admin.tsx"
+        ],
+        "checks": [
+          "frontend/tests/administration.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/administration/Administration.stories.tsx"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-settings",
+      "evidence": {
+        "pages": [
+          "frontend/src/administration/Admin.tsx",
+          "frontend/src/examples/flux-settings/composition/Composition.tsx",
+          "frontend/src/examples/flux-settings/composition/ScalarForm.tsx"
+        ],
+        "checks": [
+          "frontend/tests/administration.spec.ts",
+          "frontend/tests/flux-composition.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/administration/Administration.stories.tsx",
+          "frontend/src/examples/flux-settings/composition/Composition.stories.tsx"
+        ],
+        "storyIds": [
+          "templates-flux-settings-composition--profile",
+          "templates-flux-settings-composition--preferences",
+          "templates-flux-settings-composition--plugins",
+          "templates-flux-settings-composition--layout",
+          "templates-flux-settings-composition--permissions"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-observe",
+      "evidence": {
+        "pages": [
+          "frontend/src/observability/Views.tsx"
+        ],
+        "checks": [
+          "frontend/tests/observability.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/observability/Observability.stories.tsx"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-account",
+      "evidence": {
+        "pages": [
+          "frontend/src/administration/Account.tsx"
+        ],
+        "checks": [
+          "frontend/tests/administration.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/administration/Administration.stories.tsx"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-code",
+      "evidence": {
+        "pages": [
+          "frontend/src/developer/Lab.tsx"
+        ],
+        "checks": [
+          "frontend/tests/developer.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/developer/Developer.stories.tsx"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-workflow",
+      "evidence": {
+        "pages": [
+          "frontend/src/developer/Workflow.tsx"
+        ],
+        "checks": [
+          "frontend/tests/developer.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/developer/Developer.stories.tsx"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-voice",
+      "evidence": {
+        "pages": [
+          "frontend/src/voice/Lab.tsx"
+        ],
+        "checks": [
+          "frontend/tests/voice.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/voice/Voice.stories.tsx"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/plugin-host-ui",
+      "evidence": {
+        "pages": [
+          "frontend/src/chimera/example.ts"
+        ],
+        "checks": [
+          "frontend/tests/lab.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-app-runtime",
+      "evidence": {
+        "pages": [
+          "frontend/src/App.tsx",
+          "frontend/src/examples/tachyon-nav/TachyonNav.tsx",
+          "docs/tachyon-nav-example.md"
+        ],
+        "checks": [
+          "frontend/tests/layouts.spec.ts",
+          "frontend/tests/tachyon-nav.spec.ts",
+          "frontend/tests/tachyon-nav-custody.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/examples/tachyon-nav/TachyonNav.stories.tsx"
+        ],
+        "storyIds": [
+          "examples-tachyon-navigation--grouped",
+          "examples-tachyon-navigation--left-sub-rail",
+          "examples-tachyon-navigation--hidden-routes",
+          "examples-tachyon-navigation--orphaned",
+          "examples-tachyon-navigation--retired",
+          "examples-tachyon-navigation--empty",
+          "examples-tachyon-navigation--denied",
+          "examples-tachyon-navigation--unavailable",
+          "examples-tachyon-navigation--degraded"
+        ]
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "Button",
+        "DetailDialog",
+        "AppShell",
+        "OverlaySidebar",
+        "DetailPageLayout"
+      ],
+      "disposition": "reviewed",
+      "reason": "Representative controlled host compositions with scenario reset, narrow layout, scroll ownership and keyboard/focus checks; does not claim every prop permutation.",
+      "nextAction": "Keep representative checks; track new independent variants separately.",
+      "evidence": {
+        "pages": [
+          "frontend/src/App.tsx",
+          "frontend/src/layouts/Comparison.tsx"
+        ],
+        "stories": [
+          "frontend/src/layouts/Comparison.stories.tsx"
+        ],
+        "checks": [
+          "frontend/tests/layouts.spec.ts",
+          "frontend/tests/lab.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "names": [
+        "SummaryCards",
+        "StatusBadge",
+        "Panel",
+        "CompositionBars",
+        "BarList",
+        "BarMeter",
+        "ListPageLayout",
+        "DataTable",
+        "NavRail"
+      ],
+      "disposition": "reviewed",
+      "reason": "Representative deterministic operations compositions and admitted-receipt/sample checks. Exact sample chart UTC table complements its time-of-day axis.",
+      "nextAction": "Preserve fixed-clock/cutoff checks; full Torque parity remains separate partial acceptance.",
+      "evidence": {
+        "pages": [
+          "frontend/src/operations/Views.tsx"
+        ],
+        "checks": [
+          "frontend/tests/lab.spec.ts",
+          "frontend/tests/layouts.spec.ts",
+          "frontend/tests/dashboard.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/operations/Operations.stories.tsx",
+          "frontend/src/layouts/Comparison.stories.tsx"
+        ],
+        "storyIds": [
+          "operations-controlled-views--mission-control"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "names": [
+        "ActivityHeatmap",
+        "HourlyPulse",
+        "TimeSeriesChart"
+      ],
+      "disposition": "unsupported",
+      "reason": "Current public APIs read ambient new Date() and do not accept fixed-clock/null coverage; unsuitable for this lab deterministic missing-observation contract. App adapters are labelled run-start adaptations, not shared parity.",
+      "nextAction": "Upstream read-only contract gap: reassess a release with injected reference clock and nullable coverage before adoption.",
+      "evidence": {
+        "pages": [
+          "frontend/src/operations/Views.tsx",
+          "frontend/src/FixedActivity.tsx"
+        ],
+        "checks": [
+          "frontend/tests/dashboard.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-voice",
+      "names": [
+        "MicSelector",
+        "useAudioDevices"
+      ],
+      "disposition": "unsupported",
+      "reason": "Device enumeration/capture permissions are outside fixture-only review policy; component cannot consume controlled fixture devices.",
+      "nextAction": "Reassess a controlled device contract; do not mount live hooks.",
+      "evidence": {
+        "pages": [
+          "frontend/src/voice/Lab.tsx"
+        ],
+        "checks": [
+          "frontend/tests/voice.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "names": [
+        "TimestampSampleChart"
+      ],
+      "disposition": "reviewed",
+      "reason": "Actual timestamp/null/zero sample rendering exercised through released kit-observe SampleSeriesView; daily aggregate formatter/time-of-day axis is unsuitable for reference rollups and remains unadopted there.",
+      "nextAction": "Preserve exact observation sample checks; reassess configurable date formatter before daily-rollup adoption.",
+      "evidence": {
+        "pages": [
+          "frontend/src/observability/Views.tsx"
+        ],
+        "stories": [
+          "frontend/src/observability/Observability.stories.tsx"
+        ],
+        "checks": [
+          "frontend/tests/observability.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "Pill",
+        "Callout",
+        "ProgressBar",
+        "OverflowMenu",
+        "CollapsibleSection",
+        "Combobox",
+        "ConfirmDialog",
+        "DetailSection",
+        "FormDialog"
+      ],
+      "disposition": "reviewed",
+      "reason": "Bounded pinned 0.4.0 controlled gallery: rendered tone/clamp/animation evidence, policy-gated states, real joins, native submission admission, keyboard/dialog focus and draft/source retirement. Not every prop permutation; API gaps documented.",
+      "nextAction": "Preserve named checks; review remaining independent visual exports in separately bounded slices.",
+      "evidence": {
+        "pages": [
+          "frontend/src/primitives/Gallery.tsx",
+          "frontend/src/primitives/model.ts",
+          "docs/primitives-review.md"
+        ],
+        "checks": [
+          "frontend/tests/primitives.spec.ts",
+          "frontend/src/primitives/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/primitives/Primitives.stories.tsx"
+        ],
+        "storyIds": [
+          "primitives-controlled-gallery--recorded",
+          "primitives-controlled-gallery--empty",
+          "primitives-controlled-gallery--loading",
+          "primitives-controlled-gallery--read-failure",
+          "primitives-controlled-gallery--denied",
+          "primitives-controlled-gallery--locked",
+          "primitives-controlled-gallery--long-content",
+          "primitives-controlled-gallery--unknown"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "JsonViewer",
+        "PayloadSummary",
+        "MetaList",
+        "SearchInput"
+      ],
+      "disposition": "reviewed",
+      "reason": "Bounded pinned0.4 controlled Evidence inspector with actual recorded graph payload/metadata, syntax/summary contract checks, debounced keyboard search, modal scope and source/selection/reset retirement. Exact state/API gaps documented; not exhaustive prop coverage.",
+      "nextAction": "Preserve shared app/portable behavior checks; remaining independent exports and variants retain separate inventory actions.",
+      "evidence": {
+        "pages": [
+          "frontend/src/evidence/Inspector.tsx",
+          "frontend/src/evidence/model.ts",
+          "docs/evidence-review.md"
+        ],
+        "checks": [
+          "frontend/tests/evidence.spec.ts",
+          "frontend/src/evidence/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/evidence/Evidence.stories.tsx"
+        ],
+        "storyIds": [
+          "evidence-controlled-inspector--recorded",
+          "evidence-controlled-inspector--nested",
+          "evidence-controlled-inspector--long-content",
+          "evidence-controlled-inspector--empty",
+          "evidence-controlled-inspector--loading",
+          "evidence-controlled-inspector--denied",
+          "evidence-controlled-inspector--read-failure",
+          "evidence-controlled-inspector--unknown",
+          "evidence-controlled-inspector--malformed-raw",
+          "evidence-controlled-inspector--same-scenario-replacement"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "JsonModal",
+        "PayloadActions",
+        "CopyButton"
+      ],
+      "disposition": "deferred",
+      "reason": "Valid public components include inseparable clipboard actions under pinned0.4; this inspector policy permits no clipboard effects. JsonModal has no action-disable/override prop. Actual DetailDialog+JsonViewer composition does not count as adoption; no hiding/interception used.",
+      "nextAction": "Reassess a controlled no-copy contract or a separately authorized clipboard review; do not invoke effects in this fixture-only slice.",
+      "evidence": {
+        "pages": [
+          "docs/evidence-review.md",
+          "frontend/src/evidence/Inspector.tsx"
+        ],
+        "checks": [
+          "frontend/src/evidence/contracts.ts",
+          "frontend/tests/evidence.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "names": [
+        "Sparkbars",
+        "SignalBars",
+        "DonutChart",
+        "MiniTrend",
+        "RecentList"
+      ],
+      "disposition": "reviewed",
+      "reason": "Bounded pinned0.4 Widgets presentation with actual admitted operation-prefix UTC buckets, null/zero/partial semantics, finite aligned run-count partitions, real normalized paint/geometry, explicit scale-floor/denominator and elapsed-second labels, recent native keyboard detail/source/cutoff retirement. Supported states documented; not exhaustive prop coverage.",
+      "nextAction": "Preserve these app/portable contract checks; review remaining independent variants separately.",
+      "evidence": {
+        "pages": [
+          "frontend/src/widgets/Gallery.tsx",
+          "frontend/src/widgets/model.ts",
+          "docs/widgets-review.md"
+        ],
+        "checks": [
+          "frontend/tests/widgets.spec.ts",
+          "frontend/src/widgets/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/widgets/Widgets.stories.tsx"
+        ],
+        "storyIds": [
+          "widgets-recorded-review--recorded",
+          "widgets-recorded-review--empty",
+          "widgets-recorded-review--observed-zero",
+          "widgets-recorded-review--loading",
+          "widgets-recorded-review--read-failure",
+          "widgets-recorded-review--denied",
+          "widgets-recorded-review--gapped",
+          "widgets-recorded-review--unknown",
+          "widgets-recorded-review--long-content",
+          "widgets-recorded-review--partial-prefix",
+          "widgets-recorded-review--before-window"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "Metric"
+      ],
+      "disposition": "reviewed",
+      "reason": "Bounded pinned0.4 Widgets presentation with actual admitted operation-prefix UTC buckets, null/zero/partial semantics, finite aligned run-count partitions, real normalized paint/geometry, explicit scale-floor/denominator and elapsed-second labels, recent native keyboard detail/source/cutoff retirement. Supported states documented; not exhaustive prop coverage.",
+      "nextAction": "Preserve these app/portable contract checks; review remaining independent variants separately.",
+      "evidence": {
+        "pages": [
+          "frontend/src/widgets/Gallery.tsx",
+          "frontend/src/widgets/model.ts",
+          "docs/widgets-review.md"
+        ],
+        "checks": [
+          "frontend/tests/widgets.spec.ts",
+          "frontend/src/widgets/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/widgets/Widgets.stories.tsx"
+        ],
+        "storyIds": [
+          "widgets-recorded-review--recorded",
+          "widgets-recorded-review--empty",
+          "widgets-recorded-review--observed-zero",
+          "widgets-recorded-review--loading",
+          "widgets-recorded-review--read-failure",
+          "widgets-recorded-review--denied",
+          "widgets-recorded-review--gapped",
+          "widgets-recorded-review--unknown",
+          "widgets-recorded-review--long-content",
+          "widgets-recorded-review--partial-prefix",
+          "widgets-recorded-review--before-window"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-settings",
+      "names": [
+        "SettingsGroupForm",
+        "SettingsRenderer",
+        "SettingsProvenanceRenderer",
+        "SettingsWizard"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded pinned0.2 Settings Review modes and supported field/schema/provenance/wizard states. Actual zero/false/incomplete numeric/ARIA/native-submit guards, allowed unset without application, readonly secret presence, unknown metadata/profile failures, optional effect omission, mandatory guarded local plan inspection and source/draft/step/mode/reset/StrictMode lifetime proof. Not exhaustive manifest or field permutations.",
+      "nextAction": "Preserve app/portable/development checks; remaining independent settings exports and schema/assistive-technology permutations require separate bounded review.",
+      "evidence": {
+        "pages": [
+          "frontend/src/settings-review/Review.tsx",
+          "frontend/src/settings-review/model.ts",
+          "docs/settings-review.md"
+        ],
+        "checks": [
+          "frontend/tests/settings-review.spec.ts",
+          "frontend/src/settings-review/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/settings-review/SettingsReview.stories.tsx"
+        ],
+        "storyIds": [
+          "settings-controlled-field-review--provenance",
+          "settings-controlled-field-review--single-group",
+          "settings-controlled-field-review--grouped",
+          "settings-controlled-field-review--wizard",
+          "settings-controlled-field-review--empty",
+          "settings-controlled-field-review--loading",
+          "settings-controlled-field-review--read-failure",
+          "settings-controlled-field-review--denied",
+          "settings-controlled-field-review--locked",
+          "settings-controlled-field-review--long-content",
+          "settings-controlled-field-review--unknown-metadata",
+          "settings-controlled-field-review--unsupported-schema",
+          "settings-controlled-field-review--unknown-field",
+          "settings-controlled-field-review--invalid-number",
+          "settings-controlled-field-review--busy",
+          "settings-controlled-field-review--not-set"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-account",
+      "names": [
+        "AccountProfile",
+        "AccountPreferences",
+        "WhoamiBadge",
+        "ApiTokenManager",
+        "ConnectedAccounts"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded private0.0 candidate account review: native/current email and scope validity, immutable fictional identity and authored metadata, current target confirmation/local held intent, genuine unknown/loading/error/empty/read-only/busy appearances, StrictMode and source/draft/principal/state/reset/unmount lifetime. No credential disclosure or business effects; not exhaustive account behavior.",
+      "nextAction": "Preserve reviewed local intent/portable checks; NewTokenDisclosure and external credentials/providers remain deferred by policy.",
+      "evidence": {
+        "pages": [
+          "frontend/src/account-review/Review.tsx",
+          "frontend/src/account-review/model.ts",
+          "docs/account-review.md"
+        ],
+        "checks": [
+          "frontend/tests/account-review.spec.ts",
+          "frontend/src/account-review/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/account-review/AccountReview.stories.tsx"
+        ],
+        "storyIds": [
+          "account-controlled-account-review--profile",
+          "account-controlled-account-review--metadata",
+          "account-controlled-account-review--empty",
+          "account-controlled-account-review--loading-identity",
+          "account-controlled-account-review--identity-error",
+          "account-controlled-account-review--denied",
+          "account-controlled-account-review--read-only",
+          "account-controlled-account-review--long-content",
+          "account-controlled-account-review--unknown-identity",
+          "account-controlled-account-review--unknown-status",
+          "account-controlled-account-review--busy",
+          "account-controlled-account-review--busy-metadata",
+          "account-controlled-account-review--invalid-profile",
+          "account-controlled-account-review--unavailable-scope",
+          "account-controlled-account-review--metadata-loading",
+          "account-controlled-account-review--metadata-error"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-chat",
+      "names": [
+        "ChatInput",
+        "ChatStream",
+        "ConfirmationCard",
+        "PromptCard"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded released0.4 conversation review: native Enter/Shift+Enter/IME, prop-only finite history, busy editable composer/Stop/manual uncommitted stream, actual raw prior classification, current prompt/action/note candidate guards and source/session/prior/draft/step/StrictMode retirement, bounded transcript/modal scroll and no sending/prior mutation. Not exhaustive renderer/card behavior.",
+      "nextAction": "Preserve portable/native/lifetime checks; optional markdown/suggestions/attachments and remaining independent chat exports stay separate deferred/partial reviews.",
+      "evidence": {
+        "pages": [
+          "frontend/src/conversation-review/Review.tsx",
+          "frontend/src/conversation-review/model.ts",
+          "docs/conversation-review.md"
+        ],
+        "checks": [
+          "frontend/tests/conversation-review.spec.ts",
+          "frontend/src/conversation-review/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/conversation-review/ConversationReview.stories.tsx"
+        ],
+        "storyIds": [
+          "conversation-controlled-conversation-review--transcript",
+          "conversation-controlled-conversation-review--prompt",
+          "conversation-controlled-conversation-review--partial",
+          "conversation-controlled-conversation-review--handling",
+          "conversation-controlled-conversation-review--submitted",
+          "conversation-controlled-conversation-review--submitted-prompt",
+          "conversation-controlled-conversation-review--canceled",
+          "conversation-controlled-conversation-review--cancelled",
+          "conversation-controlled-conversation-review--failed",
+          "conversation-controlled-conversation-review--unknown-prior",
+          "conversation-controlled-conversation-review--literal-open",
+          "conversation-controlled-conversation-review--literal-pending",
+          "conversation-controlled-conversation-review--empty",
+          "conversation-controlled-conversation-review--loading",
+          "conversation-controlled-conversation-review--streaming",
+          "conversation-controlled-conversation-review--stalled",
+          "conversation-controlled-conversation-review--stream-error",
+          "conversation-controlled-conversation-review--denied",
+          "conversation-controlled-conversation-review--locked",
+          "conversation-controlled-conversation-review--long-content",
+          "conversation-controlled-conversation-review--history-error",
+          "conversation-controlled-conversation-review--history-loading"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-observe",
+      "names": [
+        "ObservationStatus",
+        "HealthSummary",
+        "StatCollection",
+        "SampleSeriesView"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded pinned0.1.1 Observation Review: resource-local availability vs exact threshold/future/invalid freshness and health, retained receipts, actual zero/null/nonfinite/unit/kind stats, host-bounded ordered exact UTC/null-gap/truncated/empty samples and rendered time geometry, native retry candidate/source/resource/clock/StrictMode lifetime, no new successful receipt or effects. No DiagnosticPanel valid-copy adoption.",
+      "nextAction": "Preserve precise native/portable/freshness/geometry checks; DiagnosticPanel remains partial under inseparable Copy policy; helpers/internal chart and broader observations remain separately bounded reviews.",
+      "evidence": {
+        "pages": [
+          "frontend/src/observation-review/Review.tsx",
+          "frontend/src/observation-review/model.ts",
+          "docs/observation-review.md"
+        ],
+        "checks": [
+          "frontend/tests/observation-review.spec.ts",
+          "frontend/src/observation-review/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/observation-review/ObservationReview.stories.tsx"
+        ],
+        "storyIds": [
+          "observation-controlled-observation-review--recorded",
+          "observation-controlled-observation-review--idle",
+          "observation-controlled-observation-review--initial-loading",
+          "observation-controlled-observation-review--initial-error",
+          "observation-controlled-observation-review--refresh-loading",
+          "observation-controlled-observation-review--refresh-error",
+          "observation-controlled-observation-review--threshold-equality",
+          "observation-controlled-observation-review--stale",
+          "observation-controlled-observation-review--future-age",
+          "observation-controlled-observation-review--invalid-clock",
+          "observation-controlled-observation-review--invalid-threshold",
+          "observation-controlled-observation-review--invalid-receipt",
+          "observation-controlled-observation-review--paused",
+          "observation-controlled-observation-review--unsupported",
+          "observation-controlled-observation-review--empty",
+          "observation-controlled-observation-review--long-content",
+          "observation-controlled-observation-review--gap",
+          "observation-controlled-observation-review--truncated",
+          "observation-controlled-observation-review--nonfinite-stat",
+          "observation-controlled-observation-review--duration-gauge",
+          "observation-controlled-observation-review--empty-bounded-window",
+          "observation-controlled-observation-review--denied",
+          "observation-controlled-observation-review--locked-retry",
+          "observation-controlled-observation-review--healthy",
+          "observation-controlled-observation-review--unhealthy",
+          "observation-controlled-observation-review--unknown-health"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-admin",
+      "names": [
+        "AdminNavigation",
+        "AdminContent",
+        "AdminShell"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded pinned0.1.0 declared navigation/content/standalone shell: actual discovery and manifest guards, readonly snapshots, canonical local/href targets and finite local inspection lifetime; no new diagnostic copy mount or business actions.",
+      "nextAction": "Additional prop combinations/wire validation remain outside this bounded review; retain supporting types/helpers as partial.",
+      "evidence": {
+        "pages": [
+          "frontend/src/admin-review/Review.tsx",
+          "frontend/src/admin-review/model.ts",
+          "frontend/src/main.tsx",
+          "docs/admin-review.md"
+        ],
+        "checks": [
+          "frontend/tests/admin-review.spec.ts",
+          "frontend/src/admin-review/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/admin-review/AdminReview.stories.tsx"
+        ],
+        "storyIds": [
+          "admin-controlled-admin-review--recorded",
+          "admin-controlled-admin-review--initial-loading",
+          "admin-controlled-admin-review--initial-error",
+          "admin-controlled-admin-review--retained-loading",
+          "admin-controlled-admin-review--retained-error",
+          "admin-controlled-admin-review--context-mismatch",
+          "admin-controlled-admin-review--unsupported",
+          "admin-controlled-admin-review--malformed",
+          "admin-controlled-admin-review--contradictory",
+          "admin-controlled-admin-review--duplicate",
+          "admin-controlled-admin-review--empty",
+          "admin-controlled-admin-review--unknown-group",
+          "admin-controlled-admin-review--unknown-page",
+          "admin-controlled-admin-review--missing-snapshot",
+          "admin-controlled-admin-review--group-loading",
+          "admin-controlled-admin-review--group-error",
+          "admin-controlled-admin-review--retained-group-error",
+          "admin-controlled-admin-review--missing-observation",
+          "admin-controlled-admin-review--status",
+          "admin-controlled-admin-review--series-absent",
+          "admin-controlled-admin-review--series-present",
+          "admin-controlled-admin-review--denied",
+          "admin-controlled-admin-review--long",
+          "admin-controlled-admin-review--standalone",
+          "admin-controlled-admin-review--standalone-series",
+          "admin-controlled-admin-review--read-only-settings"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "names": [
+        "OperationsTablePage",
+        "FilterBar",
+        "FilterChipGroup",
+        "FilterCycleToggle",
+        "FilterEntityCombobox"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded pinned0.4 run explorer: actual page/table scroll ownership, supported native filters, exact admitted receipts, reveal/check/sort reset and keyboard/modal/source boundaries; local inspection only.",
+      "nextAction": "Additional prop permutations, remote loading and entity authoring remain outside this bounded review; supporting types/helpers stay partial.",
+      "evidence": {
+        "pages": [
+          "frontend/src/run-explorer/Explorer.tsx",
+          "frontend/src/run-explorer/model.ts",
+          "docs/run-explorer.md"
+        ],
+        "checks": [
+          "frontend/tests/run-explorer.spec.ts",
+          "frontend/src/run-explorer/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/run-explorer/Explorer.stories.tsx"
+        ],
+        "storyIds": [
+          "operations-run-explorer--recorded",
+          "operations-run-explorer--incremental-eighty",
+          "operations-run-explorer--before-receipt",
+          "operations-run-explorer--empty",
+          "operations-run-explorer--loading",
+          "operations-run-explorer--resource-error",
+          "operations-run-explorer--denied",
+          "operations-run-explorer--unavailable",
+          "operations-run-explorer--long-labels",
+          "operations-run-explorer--owner-unavailable",
+          "operations-run-explorer--direct-filter-bar",
+          "operations-run-explorer--direct-filter-bar-empty"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-code",
+      "names": [
+        "TestResults",
+        "TestResultsProgress",
+        "TestSuite",
+        "Test",
+        "TestError",
+        "StackTrace",
+        "StackTraceFrames",
+        "Commit",
+        "CommitFiles",
+        "CommitFile"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded existing licensed private candidate: authored finite test ledger and actual progress/status/error/disclosures, unchanged raw stack with declared bounded file navigation, fictional supplied commit/files and exact recorded playback joins; readonly local inspection only.",
+      "nextAction": "Additional prop variants, nested helpers, parser utilities and execution/editor/highlight remain separate partial or deferred reviews.",
+      "evidence": {
+        "pages": [
+          "frontend/src/developer-evidence/Review.tsx",
+          "frontend/src/developer-evidence/model.ts",
+          "docs/developer-evidence-review.md"
+        ],
+        "checks": [
+          "frontend/tests/developer-evidence.spec.ts",
+          "frontend/src/developer-evidence/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/developer-evidence/Evidence.stories.tsx"
+        ],
+        "storyIds": [
+          "developer-independent-evidence--recorded",
+          "developer-independent-evidence--empty",
+          "developer-independent-evidence--loading",
+          "developer-independent-evidence--read-failure",
+          "developer-independent-evidence--denied",
+          "developer-independent-evidence--locked",
+          "developer-independent-evidence--long-content",
+          "developer-independent-evidence--unknown-raw-frame",
+          "developer-independent-evidence--passive-running",
+          "developer-independent-evidence--missing-duration",
+          "developer-independent-evidence--before-evidence",
+          "developer-independent-evidence--evidence-before-run-finish",
+          "developer-independent-evidence--incompatible-source"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-workflow",
+      "names": [
+        "NodeDescription",
+        "NodeAction",
+        "NodeFooter",
+        "Toolbar",
+        "Panel",
+        "Connection",
+        "Edge"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded existing dual-licensed canvas candidate: readonly current graph node slots/selected toolbar/panel, native inspection, distinct bounded connection validation and Edge namespace decorative variants, actual token geometry/reduced-motion and current source/cutoff/selection lifetimes.",
+      "nextAction": "Other graph/helper/prop contracts and execution/authoring remain partial/deferred; Edge namespace variants are not separate public export rows.",
+      "evidence": {
+        "pages": [
+          "frontend/src/workflow-review/Review.tsx",
+          "frontend/src/workflow-review/model.ts",
+          "docs/workflow-review.md"
+        ],
+        "checks": [
+          "frontend/tests/workflow-review.spec.ts",
+          "frontend/src/workflow-review/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/workflow-review/Review.stories.tsx"
+        ],
+        "storyIds": [
+          "developer-workflow-review--recorded",
+          "developer-workflow-review--empty",
+          "developer-workflow-review--loading",
+          "developer-workflow-review--read-failure",
+          "developer-workflow-review--denied",
+          "developer-workflow-review--locked",
+          "developer-workflow-review--long-content",
+          "developer-workflow-review--unknown-kind",
+          "developer-workflow-review--before-evidence",
+          "developer-workflow-review--before-run-finish",
+          "developer-workflow-review--incompatible-source"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-chat",
+      "names": [
+        "Tool",
+        "ToolHeader",
+        "ToolContent",
+        "ToolInput",
+        "ToolOutput",
+        "Reasoning",
+        "ReasoningTrigger",
+        "ReasoningContent",
+        "Sources",
+        "SourcesTrigger",
+        "SourcesContent",
+        "Source"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded released0.4 conversation evidence: current recorded tool/messages/outcomes, conservative metadata clock, native readonly disclosures, distinct authored status/null/zero/error specimens and truthful explanation/provenance, actual paint/keyboard/source-phase/cutoff/StrictMode/narrow/API-free proof.",
+      "nextAction": "Untested props/helpers and broader chat families retain partial/deferred review; no send/execution/retrieval/hidden-thought claims.",
+      "evidence": {
+        "pages": [
+          "frontend/src/conversation-evidence/Review.tsx",
+          "frontend/src/conversation-evidence/model.ts",
+          "docs/conversation-evidence-review.md"
+        ],
+        "checks": [
+          "frontend/tests/conversation-evidence.spec.ts",
+          "frontend/src/conversation-evidence/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/conversation-evidence/Evidence.stories.tsx"
+        ],
+        "storyIds": [
+          "chat-conversation-evidence--recorded",
+          "chat-conversation-evidence--empty",
+          "chat-conversation-evidence--loading",
+          "chat-conversation-evidence--read-failure",
+          "chat-conversation-evidence--denied",
+          "chat-conversation-evidence--locked",
+          "chat-conversation-evidence--long-content",
+          "chat-conversation-evidence--unknown-tool-state",
+          "chat-conversation-evidence--pending",
+          "chat-conversation-evidence--running",
+          "chat-conversation-evidence--awaiting-confirmation",
+          "chat-conversation-evidence--confirmed",
+          "chat-conversation-evidence--denied-tool",
+          "chat-conversation-evidence--error-tool",
+          "chat-conversation-evidence--zero-outcome",
+          "chat-conversation-evidence--no-outcome",
+          "chat-conversation-evidence--before-tool-finish",
+          "chat-conversation-evidence--before-metadata-snapshot",
+          "chat-conversation-evidence--incompatible-source"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-chat",
+      "names": [
+        "Context",
+        "ContextTrigger",
+        "ContextContent",
+        "ContextContentHeader",
+        "ContextInputUsage",
+        "ContextOutputUsage",
+        "ContextReasoningUsage",
+        "ContextCacheUsage",
+        "Artifact",
+        "ArtifactContent",
+        "ArtifactAction",
+        "ArtifactClose"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded usage receipt and readonly Artifact review: current admitted joins, unknown capacity and absent amounts, distinct authored finite/invalid/clamped capacity, exact USD, native popup/scroll/focus and held lease/StrictMode/source/cutoff/API-free evidence.",
+      "nextAction": "Unproven prop permutations and supporting helpers/types remain partial/deferred; no occupancy/provider/collection/business claims.",
+      "evidence": {
+        "pages": [
+          "frontend/src/usage-evidence/Review.tsx",
+          "frontend/src/usage-evidence/model.ts",
+          "docs/usage-evidence-review.md"
+        ],
+        "checks": [
+          "frontend/tests/usage-evidence.spec.ts",
+          "frontend/src/usage-evidence/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/usage-evidence/Evidence.stories.tsx"
+        ],
+        "storyIds": [
+          "chat-usage-evidence--recorded",
+          "chat-usage-evidence--empty",
+          "chat-usage-evidence--loading",
+          "chat-usage-evidence--read-failure",
+          "chat-usage-evidence--denied",
+          "chat-usage-evidence--locked",
+          "chat-usage-evidence--long-content",
+          "chat-usage-evidence--before-receipt",
+          "chat-usage-evidence--at-receipt",
+          "chat-usage-evidence--incompatible-source",
+          "chat-usage-evidence--zero-capacity-use",
+          "chat-usage-evidence--finite-capacity",
+          "chat-usage-evidence--over-budget",
+          "chat-usage-evidence--negative",
+          "chat-usage-evidence--not-finite",
+          "chat-usage-evidence--infinite-value",
+          "chat-usage-evidence--zero-max",
+          "chat-usage-evidence--global-read-failure",
+          "chat-usage-evidence--global-loading",
+          "chat-usage-evidence--global-denied"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "Card",
+        "CardHeader",
+        "CardFooter",
+        "CardTitle",
+        "CardAction",
+        "CardDescription",
+        "CardContent",
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "TabsContent",
+        "Badge",
+        "Popover",
+        "PopoverTrigger",
+        "PopoverContent"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded immutable administration directory/profile: semantic Card slots, horizontal native Tabs focus/activation, metadata Badge variants and controlled provenance Popover, actual snapshot joins/zero-vs-unknown/currentness/StrictMode/held outcomes/narrow/API-free proof.",
+      "nextAction": "Untested sizes/orientations/variants and helper/prop permutations remain partial/deferred; no authorization or identity evaluation.",
+      "evidence": {
+        "pages": [
+          "frontend/src/directory-review/Review.tsx",
+          "frontend/src/directory-review/model.ts",
+          "docs/directory-review.md"
+        ],
+        "checks": [
+          "frontend/tests/directory.spec.ts",
+          "frontend/src/directory-review/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/directory-review/Directory.stories.tsx"
+        ],
+        "storyIds": [
+          "administration-directory-review--recorded",
+          "administration-directory-review--empty",
+          "administration-directory-review--loading",
+          "administration-directory-review--failed",
+          "administration-directory-review--denied",
+          "administration-directory-review--unknown",
+          "administration-directory-review--missing-relationship",
+          "administration-directory-review--locked",
+          "administration-directory-review--long",
+          "administration-directory-review--replacement",
+          "administration-directory-review--unassigned"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "entries": [
+        "."
+      ],
+      "names": [
+        "PageHeader"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded unified recorded dashboard and distinct exact metric companion: root header/local child, current task status semantics, receipt unknown/zero/partial/raw amounts, explicit supplied statuses, native tabs/source/cutoff/StrictMode/narrow/API-free proof.",
+      "nextAction": "Aliases, untested props and supporting helpers remain partial/deferred; Torque reference fidelity remains partial.",
+      "evidence": {
+        "pages": [
+          "frontend/src/ops-dashboard/Dashboard.tsx",
+          "frontend/src/ops-dashboard/model.ts",
+          "docs/ops-dashboard-review.md"
+        ],
+        "checks": [
+          "frontend/tests/ops-dashboard.spec.ts",
+          "frontend/src/ops-dashboard/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/ops-dashboard/Dashboard.stories.tsx"
+        ],
+        "storyIds": [
+          "operations-unified-dashboard--activity",
+          "operations-unified-dashboard--mission-control",
+          "operations-unified-dashboard--usage",
+          "operations-unified-dashboard--empty",
+          "operations-unified-dashboard--loading",
+          "operations-unified-dashboard--read-failure",
+          "operations-unified-dashboard--denied",
+          "operations-unified-dashboard--unknown-status",
+          "operations-unified-dashboard--long-header",
+          "operations-unified-dashboard--before-receipt",
+          "operations-unified-dashboard--at-receipt",
+          "operations-unified-dashboard--historical"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "entries": [
+        "./widgets"
+      ],
+      "names": [
+        "Kpi",
+        "KpiGrid",
+        "IntelligenceRow"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded unified recorded dashboard and distinct exact metric companion: root header/local child, current task status semantics, receipt unknown/zero/partial/raw amounts, explicit supplied statuses, native tabs/source/cutoff/StrictMode/narrow/API-free proof.",
+      "nextAction": "Aliases, untested props and supporting helpers remain partial/deferred; Torque reference fidelity remains partial.",
+      "evidence": {
+        "pages": [
+          "frontend/src/ops-dashboard/Dashboard.tsx",
+          "frontend/src/ops-dashboard/model.ts",
+          "docs/ops-dashboard-review.md"
+        ],
+        "checks": [
+          "frontend/tests/ops-dashboard.spec.ts",
+          "frontend/src/ops-dashboard/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/ops-dashboard/Dashboard.stories.tsx"
+        ],
+        "storyIds": [
+          "operations-unified-dashboard--activity",
+          "operations-unified-dashboard--mission-control",
+          "operations-unified-dashboard--usage",
+          "operations-unified-dashboard--empty",
+          "operations-unified-dashboard--loading",
+          "operations-unified-dashboard--read-failure",
+          "operations-unified-dashboard--denied",
+          "operations-unified-dashboard--unknown-status",
+          "operations-unified-dashboard--long-header",
+          "operations-unified-dashboard--before-receipt",
+          "operations-unified-dashboard--at-receipt",
+          "operations-unified-dashboard--historical"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "entries": [
+        "."
+      ],
+      "names": [
+        "Command",
+        "CommandInput",
+        "CommandList",
+        "CommandEmpty",
+        "CommandGroup",
+        "CommandItem",
+        "CommandSeparator",
+        "CommandShortcut"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded inline native Workbench switcher: finite registry substring filter, first pointer/untouched Enter, native keyboard/IME/disabled/no-match/group/list scroll, current source/query/consumer/StrictMode retirement and narrow/API-free rendering. Initial cmdk active-descendant relation gap is documented.",
+      "nextAction": "CommandDialog and untested prop/accessibility permutations remain deferred; supporting utilities/types retain existing dispositions.",
+      "evidence": {
+        "pages": [
+          "frontend/src/workbench/Switcher.tsx",
+          "frontend/src/workbench/switcher.css",
+          "docs/keyboard-switcher-review.md"
+        ],
+        "checks": [
+          "frontend/tests/switcher.spec.ts",
+          "frontend/src/workbench/switcher-contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/workbench/Switcher.stories.tsx"
+        ],
+        "storyIds": [
+          "workbench-keyboard-switcher--recorded",
+          "workbench-keyboard-switcher--operations",
+          "workbench-keyboard-switcher--administration",
+          "workbench-keyboard-switcher--no-match",
+          "workbench-keyboard-switcher--withdrawn",
+          "workbench-keyboard-switcher--long-literal",
+          "workbench-keyboard-switcher--unavailable",
+          "workbench-keyboard-switcher--earlier-prefix"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "entries": [
+        "."
+      ],
+      "names": [
+        "Table",
+        "TableHeader",
+        "TableBody",
+        "TableFooter",
+        "TableHead",
+        "TableRow",
+        "TableCell",
+        "TableCaption",
+        "ScrollArea"
+      ],
+      "disposition": "reviewed",
+      "reason": "Independent bounded native Event Ledger: current admitted UTC rows, exact semantic caption/headers/body/footer, recorded versus authored/zero/Unknown counts, native vertical viewport keyboard and implicit thumb, finite current callback/held outcome retirement and responsive escaped inspection.",
+      "nextAction": "ScrollBar, supporting helpers/types and untested orientations/props remain deferred/partial; no independent bar or horizontal-scroll claim.",
+      "evidence": {
+        "pages": [
+          "frontend/src/event-ledger/Ledger.tsx",
+          "frontend/src/event-ledger/model.ts",
+          "frontend/src/event-ledger/ledger.css",
+          "docs/event-ledger-review.md"
+        ],
+        "checks": [
+          "frontend/tests/event-ledger.spec.ts",
+          "frontend/src/event-ledger/contracts.ts"
+        ],
+        "stories": [
+          "frontend/src/event-ledger/Ledger.stories.tsx"
+        ],
+        "storyIds": [
+          "evidence-event-ledger--recorded",
+          "evidence-event-ledger--historical",
+          "evidence-event-ledger--earlier-prefix",
+          "evidence-event-ledger--empty",
+          "evidence-event-ledger--loading",
+          "evidence-event-ledger--read-failure",
+          "evidence-event-ledger--denied",
+          "evidence-event-ledger--missing",
+          "evidence-event-ledger--unknown",
+          "evidence-event-ledger--long-literal"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "ThemePicker",
+        "ModeToggle",
+        "Checkbox",
+        "Switch"
+      ],
+      "entries": [
+        "."
+      ],
+      "disposition": "reviewed",
+      "reason": "Bounded current-scope controlled Appearance Review: native palette/mode/boolean interactions, installed scoped semantic paint, system listener lifetime and exact companion; supported default states only.",
+      "nextAction": "Review other variants/disabled/indeterminate and alias entry contracts independently; do not infer persisted preferences or universal nested dark utility isolation.",
+      "evidence": {
+        "pages": [
+          "frontend/src/appearance-review/Review.tsx",
+          "docs/appearance-review.md"
+        ],
+        "stories": [
+          "frontend/src/appearance-review/Review.stories.tsx"
+        ],
+        "checks": [
+          "frontend/tests/appearance.spec.ts",
+          "frontend/src/appearance-review/contracts.ts"
+        ],
+        "storyIds": [
+          "review-appearance--light",
+          "review-appearance--dark",
+          "review-appearance--system",
+          "review-appearance--phosphor",
+          "review-appearance--amber",
+          "review-appearance--high-contrast",
+          "review-appearance--unknown-palette",
+          "review-appearance--unavailable",
+          "review-appearance--denied",
+          "review-appearance--long-label"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "Tooltip",
+        "TooltipTrigger",
+        "TooltipContent",
+        "TooltipProvider",
+        "Skeleton",
+        "Separator"
+      ],
+      "entries": [
+        "."
+      ],
+      "disposition": "reviewed",
+      "reason": "Bounded supplemental source-help tooltip, passive declared-loading Skeleton and default horizontal Separator in current-prefix Evidence States.",
+      "nextAction": "Other positioning/orientation/aliases and implicit Arrow remain independently deferred.",
+      "evidence": {
+        "pages": [
+          "frontend/src/evidence-states/Review.tsx",
+          "docs/evidence-states.md"
+        ],
+        "stories": [
+          "frontend/src/evidence-states/Review.stories.tsx"
+        ],
+        "checks": [
+          "frontend/tests/evidence-states.spec.ts"
+        ],
+        "storyIds": [
+          "review-evidence-states--ready",
+          "review-evidence-states--loading",
+          "review-evidence-states--long"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "useControlledRecordNavigation"
+      ],
+      "entries": [
+        "."
+      ],
+      "disposition": "partial",
+      "reason": "Exact unpublished CW-20261010-0036 candidate consumed in Torque wrapping popup and independent Administration inline stop navigation. Bounded native/current-positive/stale-negative acceptance is undergoing independent review; synthetic composition is not OS IME and physical touch is untested.",
+      "nextAction": "Review exact candidate provenance and final named native/lifecycle evidence before marking this export reviewed; registry publication and deployment remain separate.",
+      "evidence": {
+        "pages": [
+          "frontend/src/examples/torque/TaskInspection.tsx",
+          "frontend/src/examples/administration/AdministrationExample.tsx"
+        ],
+        "checks": [
+          "frontend/tests/torque-keyboard.spec.ts",
+          "frontend/tests/controlled-record-navigation.spec.ts"
+        ],
+        "stories": [
+          "frontend/src/examples/torque/Torque.stories.tsx",
+          "frontend/src/examples/administration/Administration.stories.tsx"
+        ],
+        "storyIds": [
+          "app-examples-torque--tasks",
+          "app-examples-administration--directory"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "InspectionDialog",
+        "InspectionDialogProps"
+      ],
+      "disposition": "partial",
+      "reason": "CW-20261010-0035 exact unpublished local0.4.0 candidate; Torque dashboard and Messaging chat consume bounded chrome. Focus/navigation/admission remain host policy. Independent manager review pending; registry0.4.0 does not imply this API.",
+      "nextAction": "Complete manager review and reconcile exact0036 candidate before combined consumption; publication and deployment are separate owner actions.",
+      "evidence": {
+        "pages": [
+          "docs/inspection-extraction.md"
+        ],
+        "stories": [
+          "frontend/src/examples/torque/Torque.stories.tsx",
+          "frontend/src/examples/messaging/Messaging.stories.tsx"
+        ],
+        "checks": [
+          "frontend/tests/torque-keyboard.spec.ts",
+          "frontend/tests/messaging-example.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-dashboard",
+      "names": [
+        "OperationsListPage"
+      ],
+      "entries": [
+        "./layout"
+      ],
+      "disposition": "partial",
+      "reason": "Exact local CW-20261010-0073 candidate, actual Torque modal and proposed Run Explorer inline adapters. Native bounded contract proof; independent manager review and registry release are separate. CW-20261010-0074 composes one AppShell, fixture chat and generic Run Explorer projection with inline/modal review modes.",
+      "nextAction": "Review exact candidate source and installed proof; promote only within reviewed bounded contract, never claim existing Run Explorer inline parity or registry publication.",
+      "evidence": {
+        "pages": [
+          "frontend/src/operations-list-proof/Proof.tsx",
+          "frontend/src/examples/ops-shell/OpsShellExample.tsx"
+        ],
+        "stories": [
+          "frontend/src/operations-list-proof/OperationsList.stories.tsx",
+          "frontend/src/examples/ops-shell/OpsShell.stories.tsx"
+        ],
+        "storyIds": [
+          "operations-generic-list-candidate--torque-modal",
+          "operations-generic-list-candidate--run-evidence-inline",
+          "templates-operations-shell--run-explorer-inline",
+          "templates-operations-shell--run-explorer-modal"
+        ],
+        "checks": [
+          "frontend/tests/operations-list-candidate.spec.ts",
+          "frontend/tests/ops-shell.spec.ts"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/kit-chat",
+      "names": [
+        "Envelope",
+        "EnvelopeHeader",
+        "EnvelopeBody",
+        "EnvelopeFooter",
+        "EnvelopeSection",
+        "ArtifactCard",
+        "DocumentCard",
+        "DiffCard",
+        "InfoCard",
+        "ListCard",
+        "MetricCard",
+        "ProgressCard",
+        "TableCard",
+        "TimelineCard"
+      ],
+      "disposition": "reviewed",
+      "reason": "Bounded local Flux stream candidates: complete/partial/empty/long operands, unsupported/source/access truth, fixed zero vs absent, original-index inert table action adaptation, native theme/narrow and candidate retirement checks. No exhaustive props, producer or owner visual acceptance.",
+      "nextAction": "Retain named local evidence; extraction requires owner review and DEC026 distinct second consumer.",
+      "evidence": {
+        "pages": [
+          "frontend/src/examples/flux-cards/Cards.tsx",
+          "frontend/src/examples/flux-cards/Gallery.tsx",
+          "docs/flux-cards-proposal.md"
+        ],
+        "stories": [
+          "frontend/src/examples/flux-cards/FluxCards.stories.tsx"
+        ],
+        "checks": [
+          "frontend/tests/flux-cards.spec.ts"
+        ],
+        "storyIds": [
+          "flux-stream-cards--approval-card-complete",
+          "flux-stream-cards--session-task-complete",
+          "flux-stream-cards--progress-card-partial"
+        ]
+      }
+    },
+    {
+      "package": "@hollis-labs/design-components",
+      "names": [
+        "RadialMenu",
+        "useLongPress"
+      ],
+      "entries": [
+        "."
+      ],
+      "disposition": "partial",
+      "reason": "CW-20261010-0091 unpublished local candidate from landed KIT PR109. Exact KIT source/archive/installed bytes and bounded author native/emulation receipts independently reviewed; isolated Nil and message specimens exercise 13 named controls. This disposition tracks bounded local evidence, not exhaustive public-state, physical touch or OS IME coverage.",
+      "nextAction": "Retain named source/pin and acceptance receipts; extend evidence for additional public states or hardware contexts before claiming exhaustive coverage.",
+      "evidence": {
+        "pages": [
+          "frontend/src/nil-radial/Specimen.tsx",
+          "docs/nil-radial.md",
+          "frontend/src/examples/tachyon-nav/TachyonNav.tsx",
+          "docs/tachyon-nav-example.md"
+        ],
+        "stories": [
+          "frontend/src/nil-radial/NilRadial.stories.tsx",
+          "frontend/src/examples/tachyon-nav/TachyonNav.stories.tsx"
+        ],
+        "checks": [
+          "frontend/tests/nil-radial.spec.ts",
+          "frontend/tests/tachyon-nav.spec.ts",
+          "frontend/tests/tachyon-nav-custody.spec.ts"
+        ],
+        "storyIds": [
+          "behaviors-nil-radial--nil",
+          "behaviors-nil-radial--message",
+          "examples-tachyon-navigation--grouped",
+          "examples-tachyon-navigation--left-sub-rail",
+          "examples-tachyon-navigation--hidden-routes",
+          "examples-tachyon-navigation--orphaned",
+          "examples-tachyon-navigation--retired",
+          "examples-tachyon-navigation--empty",
+          "examples-tachyon-navigation--denied",
+          "examples-tachyon-navigation--unavailable",
+          "examples-tachyon-navigation--degraded"
+        ]
+      }
+    }
+  ]
+}
