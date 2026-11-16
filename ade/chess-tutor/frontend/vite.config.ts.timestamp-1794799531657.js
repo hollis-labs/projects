@@ -1,0 +1,12 @@
+// vite.config.ts
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
+
+var vite_config_default = defineConfig({
+  plugins: [react()],
+  server: { port: 5199, proxy: { "/api": process.env.CHESS_TUTOR_API ?? "http://127.0.0.1:8791" } },
+  build: { outDir: "dist", emptyOutDir: true },
+})
+
+export { vite_config_default as default }
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImltcG9ydCByZWFjdCBmcm9tIFwiQHZpdGVqcy9wbHVnaW4tcmVhY3RcIlxuaW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSBcInZpdGVcIlxuXG4vLyBUaGUgR28gc2VydmVyICguLi9jbWQpIHNlcnZlcyB0aGUgYnVpbHQgcGFnZSBhbmQgdGhlIGFnZW50IGhvc3Q7IGluIGRldmVsb3BtZW50IHRoZSBwYWdlXG4vLyBpcyBzZXJ2ZWQgaGVyZSBhbmQgL2FwaSBnb2VzIHRvIGl0LlxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgcGx1Z2luczogW3JlYWN0KCldLFxuICBzZXJ2ZXI6IHsgcG9ydDogNTE5OSwgcHJveHk6IHsgXCIvYXBpXCI6IHByb2Nlc3MuZW52LkNIRVNTX1RVVE9SX0FQSSA/PyBcImh0dHA6Ly8xMjcuMC4wLjE6ODc5MVwiIH0gfSxcbiAgYnVpbGQ6IHsgb3V0RGlyOiBcImRpc3RcIiwgZW1wdHlPdXREaXI6IHRydWUgfSxcbn0pXG4iXSwKICAibWFwcGluZ3MiOiAiO0FBQUE7QUFDQTtBQUlBLElBQU8sc0JBQVEsYUFBYTtBQUFBLEVBQzFCLFNBQVMsQ0FBQyxNQUFNLENBQUM7QUFBQSxFQUNqQixRQUFRLEVBQUUsTUFBTSxNQUFNLE9BQU8sRUFBRSxRQUFRLFFBQVEsSUFBSSxtQkFBbUIsd0JBQXdCLEVBQUU7QUFBQSxFQUNoRyxPQUFPLEVBQUUsUUFBUSxRQUFRLGFBQWEsS0FBSztBQUM3QyxDQUFDOyIsCiAgIm5hbWVzIjogW10KfQo=
