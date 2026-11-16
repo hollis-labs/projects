@@ -72,6 +72,13 @@ hub.subscribe((e: HubEvent) => {
     GUIDE_KEY,
     e.state && (e.state.status === "running" || e.state.status === "paused") ? e.state : null,
   )
+  if (e.what === "stalled" && e.state?.stalled) {
+    void session.send(
+      `<guide-event>\nThe guide "${e.state.guide.title}" is paused at step ${e.state.index + 1}: its own action was refused. ${e.state.stalled.reason} The application wrote this; the person did not type it. Look at the board, then put it right: stop this guide and start a corrected one from where things stand, and tell the person in a sentence what happened.\n</guide-event>`,
+      { auto: "The guide needs the tutor" },
+    )
+    return
+  }
   if (e.what !== "done" || !e.state) return
   const s = e.state
   const how = s.history.map((h) => `${h.step} ${h.how}`).join(", ")
