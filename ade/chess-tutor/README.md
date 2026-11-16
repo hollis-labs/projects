@@ -8,7 +8,7 @@ game. It is an example of the interaction, not a chess product.
   board shows, what can be done on it, what can be asked of it, where each square is.
 - Pointing, the guide and the conversation come from `@hollis-labs/ade-core`,
   `@hollis-labs/ade-react` and `@hollis-labs/ade-agent`; the server side of the conversation
-  is `go/agenthost`.
+  is `github.com/hollis-labs/libs/agent/host`.
 
 What to try: click a piece and ask "what can this do?"; shift-click a few squares and ask
 about "these"; ask to be taught an opening step by step and play the moves the guide waits
@@ -16,10 +16,8 @@ for (play a different one to see it notice); reload mid-lesson.
 
 ## Run
 
-From the repository root, once: `npm install && npm run build`.
-
-    cd examples/chess-tutor
-    (cd frontend && npm run build)
+    cd ade/chess-tutor
+    (cd frontend && npm install && npm run build)
     go build -o bin/chess-tutor ./cmd/chess-tutor
     CHESS_TUTOR_GATEWAY=<an Anthropic-compatible base URL> \
     CHESS_TUTOR_MODEL=<model or alias> \
