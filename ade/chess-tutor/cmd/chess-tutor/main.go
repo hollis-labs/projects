@@ -17,7 +17,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/hollis-labs/ade/go/agenthost"
+	"github.com/hollis-labs/ade-core/go/agenthost"
 )
 
 func env(name, fallback string) string {

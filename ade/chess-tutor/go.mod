@@ -1,8 +1,8 @@
-module github.com/hollis-labs/ade/examples/chess-tutor
+module github.com/hollis-labs/ade-core/examples/chess-tutor
 
 go 1.26.11
 
-require github.com/hollis-labs/ade/go/agenthost v0.0.0
+require github.com/hollis-labs/ade-core/go/agenthost v0.0.0
 
 require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -21,4 +21,4 @@ require (
 )
 
 // The example lives beside the module it uses.
-replace github.com/hollis-labs/ade/go/agenthost => ../../go/agenthost
+replace github.com/hollis-labs/ade-core/go/agenthost => ../../go/agenthost
